@@ -27,26 +27,21 @@ The **Regime Detection Indicator** goes beyond simple overbought/oversold oscill
 
 This allows traders to answer the most important question in trading: **"Is the market trending, crashing, or ranging?"**
 
-
-
 ![Indicator Screenshot](screenshots/XAUUSDM5.png)
-<sub>*(XAUUSD, M5, 15-Dec-2025)*<sub>
-
+<sub>*(XAUUSD, M5, 15-Dec-2025)*</sub>
 
 ![Indicator Screenshot](screenshots/NDX100M5.png)
-<sub>*(NDX100, M5, 02-Dec-2025)*<sub>
-
+<sub>*(NDX100, M5, 02-Dec-2025)*</sub>
 
 ![Indicator Screenshot](screenshots/EURUSDH1.png)
-<sub>*(EURUSD, H1, 29-Oct-2025 to 06-Nov-2025)*<sub>
-
+<sub>*(EURUSD, H1, 29-Oct-2025 to 06-Nov-2025)*</sub>
 
 ---
 
 ## ✨ Key Features
 
 * **🚫 Non-Repainting (Bar-Close Stable):** Crucial for algo-trading. The indicator "latches" its values to the previous closed bar. It **never** changes its signal or color while the current candle is forming.
-* **🧠 Auto-Adaptive Thresholds:** No fixed levels (e.g., "Slope > 0.05"). Instead, it uses **Standard Deviations** and **Z-Scores**. This means it works automatically on **Forex, Crypto, Indices, and Commodities** without constant tweaking.
+* **🧠 Auto-Adaptive Thresholds:** No fixed levels (e.g., "Slope > 0.05"). Instead, it uses **Standard Deviations** and **Z-Scores**. This means it works automatically on **Forex, Crypto, Indices (US100), and Commodities** without constant tweaking.
 * **🎨 Dynamic Coloring:** The indicator line and (optionally) the main chart background change color to reflect the current regime instantly.
 * **🔔 Smart Alerts:** Receive notifications (Pop-up, Sound, Log) only when the market regime significantly shifts.
 * **📉 Visual Diagnostics:** Displays the active Linear Regression line directly on the price chart for the lookback period.
@@ -66,16 +61,17 @@ The indicator combines **Trend Direction** and **Volatility State** to output on
 | **FLAT** | (ANY) | **SIDEWAYS** | ![#FFD700](https://placehold.co/15x15/FFD700/FFD700.png) `Gold` | Mean-reverting, ranging, or chopping. Best to stay out. |
 
 ---
+
 ## 🧮 Technical Logic
 
 The indicator calculates two rolling metrics over a user-defined lookback window ($N$):
 
-1.  **Trend Metric:**
+1. **Trend Metric:**
     * Calculates the **Linear Regression Slope** of the price over $N$ bars.
     * Determines the **Standard Deviation** of that slope.
     * *Trigger:* If Slope > $+1.5\sigma$, it is an Uptrend. If Slope < $-1.5\sigma$, it is a Downtrend.
 
-2.  **Volatility Metric:**
+2. **Volatility Metric:**
     * Calculates the standard deviation of **Logarithmic Returns** (Realized Volatility).
     * Converts this to a **Z-Score** relative to recent history.
     * *Trigger:* If Z-Score > $1.0$, Volatility is High.
@@ -106,6 +102,7 @@ This indicator is optimized for `iCustom` calls within Expert Advisors.
 * **Buffer 2:** `Volatility` (Double) - The realized volatility value.
 
 ### MQL5 Code Example
+
 ```cpp
 // Define the handle in OnInit()
 int handle = iCustom(_Symbol, _Period, "RegimeDetectionIndicator", ... inputs ...);
