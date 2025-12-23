@@ -43,7 +43,8 @@ The backtest results demonstrate a massive improvement in **Net Profit** (approx
 ### 1. Before Money Management (Fixed Lot)
 The baseline strategy shows steady but slower growth. Without the compounding effect of RouletteMM, the equity curve is linear, and the total net profit is significantly lower.
 
-![Before MM Graph](image_aca2b0.png)
+![Before MM Graph](screenshots/XAUUSDH1withoutMMBalance.PNG)
+![Before MM Graph](screenshots/XAUUSDH1withoutMMBacktest.PNG)
 *(Source: Backtest Graph 2024-2025: XAUUSD, H1 - Before M.M.)*
 
 ### 2. After RouletteMM (Positive Progression)
