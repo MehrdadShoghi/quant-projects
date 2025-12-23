@@ -54,7 +54,9 @@ The following visual tests demonstrate how **RouletteMM** transforms standard st
 ### XAUUSD (Gold): Breakout Strategy
 **Top:** Fixed Lot Size | **Bottom:** With RouletteMM (Exponential Growth)
 
-![XAUUSD Comparison](screenshots/XAUUSD_Compare.png)
+![XAUUSD Comparison](screenshots/XAUUSDH1withoutMMBalance.PNG)
+
+![XAUUSD Comparison](screenshots/XAUUSDH1withMMBalance.PNG)
 
 ---
 
