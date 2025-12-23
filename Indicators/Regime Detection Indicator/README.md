@@ -27,14 +27,19 @@ The **Regime Detection Indicator** goes beyond simple overbought/oversold oscill
 
 This allows traders to answer the most important question in trading: **"Is the market trending, crashing, or ranging?"**
 
+
+
 ![Indicator Screenshot](screenshots/XAUUSDM5.png)
 <sub>*(XAUUSD, M5, 15-Dec-2025)*<sub>
 
+
 ![Indicator Screenshot](screenshots/NDX100M5.png)
-*(NDX100, M5, 02-Dec-2025)*
+<sub>*(NDX100, M5, 02-Dec-2025)*<sub>
+
 
 ![Indicator Screenshot](screenshots/XAUUSDM5.png)
-*(XAUUSD, M5, 15-Dec-2025 to 16-Dec-2025)*
+<sub>*(XAUUSD, M5, 15-Dec-2025 to 16-Dec-2025)*<sub>
+
 
 ---
 
