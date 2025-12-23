@@ -147,5 +147,5 @@ void OnTradeTransaction(const MqlTradeTransaction& trans, ...) {
 
 ---
 
-**Author:** Gemini AI User  
+**Author:** Mehrdad Shoghi 
 **Copyright:** © 2025
