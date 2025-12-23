@@ -1,4 +1,4 @@
-# 📈 Case Study: RouletteMM Performance Analysis
+# 📈 Case Study: XAUUSD-RouletteMM Performance Analysis
 
 ![Platform](https://img.shields.io/badge/Platform-MetaTrader%205-blue)
 ![Asset](https://img.shields.io/badge/Asset-XAUUSD%20(Gold)-gold)
@@ -34,7 +34,7 @@ The backtest results demonstrate a massive improvement in **Net Profit** (approx
 * **Timeframe:** H1 (1-Hour)
 * **Period:** 2024.01.09 - 2025.12.11
 * **Initial Deposit:** $10,000.00
-* **Strategy Type:** Trend Following / Breakout
+* **Strategy Type:** Breakout Strategy
 
 ---
 
