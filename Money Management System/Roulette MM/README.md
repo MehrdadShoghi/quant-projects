@@ -11,6 +11,8 @@
 
 ## 📑 Table of Contents
 - [Overview](#-overview)
+- [Theory & Logic](#-theory--logic)
+- [Performance Comparison](#-performance-comparison)
 - [Key Features](#-key-features)
 - [Strategy Matrix (How to Read)](#-strategy-matrix-how-to-read)
 - [Technical Logic](#-technical-logic)
@@ -28,9 +30,35 @@ This allows developers to plug professional-grade "Casino Math" into any EA with
 
 ---
 
+## 📘 Theory & Logic
+
+The **Roulette Trader** system is derived from a modified "Reverse Martingale" probability model adapted for financial markets. Unlike traditional Martingale systems that dangerously increase risk after losses (often leading to blown accounts), this logic employs a **Positive Progression** model. It scales position sizes only *after* profitable trades, capitalizing on the "clustering" nature of market trends. This approach allows the algorithm to aggressively compound equity during winning streaks while keeping the initial capital exposure static and minimal.
+
+To solve the "giveback" problem common in progression strategies, this library implements two proprietary safeguards:
+1. **Cycle Targets (Locking Profits):** This acts as a "Take Profit" for your money management. Once a specific sequence of wins is achieved (e.g., 6 units), the system forces a reset to the base lot, effectively "locking in" the compounded gains before a market reversal can reclaim them.
+2. **Flattening (Defense):** This acts as a circuit breaker. Upon any loss, the system immediately reverts trade volume to a microscopic level (e.g., 0.01 lots). It remains in this "flat" state during chop or drawdowns, ensuring that losing streaks consume virtually zero capital until a new winning trend is confirmed.
+
+---
+
+## 📊 Performance Comparison
+
+The following visual tests demonstrate how **RouletteMM** transforms standard strategies. By controlling drawdown during chop and compounding during trends, the equity curve is significantly improved.
+
+### EURUSD: Trend Strategy
+**Top:** Fixed Lot Size (Stagnant/Loss) | **Bottom:** With RouletteMM (Exponential Growth)
+
+![EURUSD Comparison](screenshots/EURUSD_Compare.png)
+
+### XAUUSD (Gold): Breakout Strategy
+**Left:** Without MM (Deep Drawdown) | **Right:** With RouletteMM (Recovered & Profitable)
+
+![XAUUSD Comparison](screenshots/XAUUSD_Compare.png)
+
+---
+
 ## ✨ Key Features
 
-* **🛡️ Flattening (Defense):** The system automatically drops trade size to a microscopic level (e.g., 0.01 lots) immediately after a loss. It stays flat until a win is secured, protecting the account during choppy markets.
+* **🛡️ Flattening (Defensive Mode):** The system automatically drops trade size to a microscopic level (e.g., 0.01 lots) immediately after a loss. It stays flat until a win is secured, protecting the account during choppy markets.
 * **💾 State Persistence:** Uses Terminal Global Variables to "remember" the cycle position. If you restart MT5 or recompile your EA, the strategy picks up exactly where it left off.
 * **📦 Plug-and-Play:** Zero global variable clutter. The entire system is contained within the `CRouletteMM` class.
 * **🧠 Adaptive Logic:** Supports three distinct mathematical models for different market conditions (Trending vs. Mean Reversion).
