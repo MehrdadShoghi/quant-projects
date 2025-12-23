@@ -30,6 +30,12 @@ This allows traders to answer the most important question in trading: **"Is the 
 ![Indicator Screenshot](screenshots/XAUUSDM5.png)
 *(XAUUSD, M5, 15-Dec-2025 to 16-Dec-2025)*
 
+![Indicator Screenshot](screenshots/XAUUSDM5.png)
+*(XAUUSD, M5, 15-Dec-2025 to 16-Dec-2025)*
+
+![Indicator Screenshot](screenshots/XAUUSDM5.png)
+*(XAUUSD, M5, 15-Dec-2025 to 16-Dec-2025)*
+
 ---
 
 ## ✨ Key Features
