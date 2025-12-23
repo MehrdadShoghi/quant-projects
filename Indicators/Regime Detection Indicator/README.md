@@ -1,70 +1,141 @@
-# Regime Detection Indicator (MQL5)
+# 📊 Regime Detection Indicator (MQL5)
 
-**Version:** 3.08  
-**Author:** Mehrdad Shoghi  
-**Platform:** MetaTrader 5 (MT5)
+![Platform](https://img.shields.io/badge/Platform-MetaTrader%205-blue)
+![Language](https://img.shields.io/badge/Language-MQL5-green)
+![Version](https://img.shields.io/badge/Version-3.08-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-![Indicator Screenshot](https://via.placeholder.com/800x400?text=Place+Your+Screenshot+Here)
+**An adaptive, non-repainting market classification tool for algorithmic and manual trading.**
 
+---
+
+## 📑 Table of Contents
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Regime Matrix (How to Read)](#-regime-matrix-how-to-read)
+- [Technical Logic](#-technical-logic)
+- [Parameters](#-parameters)
+- [Developer Integration (EA)](#-developer-integration-ea)
+- [Installation](#-installation)
+- [Disclaimer](#-disclaimer)
+
+---
 
 ## 📈 Overview
 
-The **Regime Detection Indicator** is a sophisticated market classification tool designed for algorithmic and manual trading on MetaTrader 5.
+The **Regime Detection Indicator** goes beyond simple overbought/oversold oscillators. It uses statistical analysis (Linear Regression Slope + Realized Volatility) to classify the market into 5 distinct "Regimes."
 
-Unlike standard oscillators that rely on fixed overbought/oversold levels, this indicator uses **Adaptive Statistics** (Linear Regression Slope + Realized Volatility) to classify the market into 5 distinct "Regimes." It effectively filters out noise during sideways markets and identifies high-probability breakout or crash scenarios.
+This allows traders to answer the most important question in trading: **"Is the market trending, crashing, or ranging?"**
+
+![Indicator Screenshot](https://via.placeholder.com/800x400?text=Indicator+Screenshot+Placeholder)
+*(Replace this link with a screenshot of your chart)*
+
+---
 
 ## ✨ Key Features
 
-* **🚫 Non-Repainting (Bar-Close Stable):** Explicitly designed for reliability. The indicator "latches" values to the previous closed bar while the current bar is forming. It does not flicker or change colors mid-candle.
-* **🧠 Auto-Adaptive Thresholds:** Uses Standard Deviations and Z-Scores instead of fixed values. It automatically adjusts to the volatility of any asset (Crypto, Indices, Forex, Commodities).
-* **🎨 Visual Regime Map:** Colors the subwindow line and (optionally) the main chart background to reflect the current market state.
-* **📊 On-Chart Diagnostics:** Draws the active Linear Regression line and displays a real-time status panel.
-* **🔔 Alerts:** Built-in popup and log alerts when the market regime shifts.
+* **🚫 Non-Repainting (Bar-Close Stable):** Crucial for algo-trading. The indicator "latches" its values to the previous closed bar. It **never** changes its signal or color while the current candle is forming.
+* **🧠 Auto-Adaptive Thresholds:** No fixed levels (e.g., "Slope > 0.05"). Instead, it uses **Standard Deviations** and **Z-Scores**. This means it works automatically on **Forex, Crypto, Indices, and Commodities** without constant tweaking.
+* **🎨 Dynamic Coloring:** The indicator line and (optionally) the main chart background change color to reflect the current regime instantly.
+* **🔔 Smart Alerts:** Receive notifications (Pop-up, Sound, Log) only when the market regime significantly shifts.
+* **📉 Visual Diagnostics:** Displays the active Linear Regression line directly on the price chart for the lookback period.
 
-## 🧩 How It Works
+---
 
-The indicator calculates a 2D Matrix of market states based on two rolling metrics over `N` bars:
+## 🧩 Regime Matrix (How to Read)
 
-1.  **Trend Strength:** Calculated via the Slope of a Linear Regression.
-2.  **Volatility:** Calculated via the Standard Deviation of Log-Returns.
+The indicator combines **Trend Direction** and **Volatility State** to output one of five regimes:
 
-### The Regime Matrix
-
-| Trend Direction | Volatility | **Regime Name** | **Color** | **Market Behavior** |
+| Trend State | Volatility | **Regime Name** | **Color** | **Meaning** |
 | :--- | :--- | :--- | :--- | :--- |
-| **UP** | **HIGH** | **EXPLOSIVE UP** | `Dark Green` | Strong momentum, short squeezes, FOMO rallies. |
-| **UP** | NORMAL | **STEADY UP** | `Lime` | Healthy, sustainable uptrend. Ideal for trend following. |
-| **DOWN** | **HIGH** | **CRASH / DUMP** | `Dark Red` | Panic selling, news events, strong breakdown. |
-| **DOWN** | NORMAL | **SLOW BLEED** | `Light Coral` | Grinding bear market or correction. |
-| **FLAT** | (ANY) | **SIDEWAYS** | `Gold` | Mean-reverting, choppy, or accumulation/distribution. |
+| **UP** | **HIGH** | **EXPLOSIVE UP** | `Dark Green` | FOMO rally, short squeeze, or parabolic move. |
+| **UP** | NORMAL | **STEADY UP** | `Lime` | Healthy, sustainable trend. Best for trend-following. |
+| **DOWN** | **HIGH** | **CRASH / DUMP** | `Dark Red` | Panic selling or news-driven breakdown. |
+| **DOWN** | NORMAL | **SLOW BLEED** | `Light Coral` | Grinding bear market or weak correction. |
+| **FLAT** | (ANY) | **SIDEWAYS** | `Gold` | Mean-reverting, ranging, or chopping. Best to stay out. |
 
-## ⚙️ Inputs & Parameters
+---
+
+## 🧮 Technical Logic
+
+The indicator calculates two rolling metrics over a user-defined lookback window ($N$):
+
+1.  **Trend Metric:**
+    * Calculates the **Linear Regression Slope** of the price over $N$ bars.
+    * Determines the **Standard Deviation** of that slope.
+    * *Trigger:* If Slope > $+1.5\sigma$, it is an Uptrend. If Slope < $-1.5\sigma$, it is a Downtrend.
+
+2.  **Volatility Metric:**
+    * Calculates the standard deviation of **Logarithmic Returns** (Realized Volatility).
+    * Converts this to a **Z-Score** relative to recent history.
+    * *Trigger:* If Z-Score > $1.0$, Volatility is High.
+
+---
+
+## ⚙️ Parameters
 
 | Parameter | Default | Description |
 | :--- | :--- | :--- |
-| `InpPriceType` | Close | The price data to analyze (Close, High, Low, Median, etc.). |
-| `InpLookback` | 30 | The rolling window size (in bars) for regression and volatility calculations. |
-| `InpTrendSensitivity`| 1.5 | Trend trigger threshold in **Standard Deviations**. |
-| `InpVolSensitivity` | 1.0 | Volatility trigger threshold in **Z-Score**. |
-| `InpShadeBackground`| true | Enables coloring the main chart background based on the regime. |
-| `InpShowRegLine` | true | Draws the black Linear Regression line on the price chart. |
+| `InpPriceType` | `PRICE_CLOSE` | Data source (Close, High, Low, Median, etc.). |
+| `InpLookback` | `30` | Number of bars for the rolling window. |
+| `InpTrendSensitivity`| `1.5` | Trend threshold in **Standard Deviations**. Increase to filter more noise. |
+| `InpVolSensitivity` | `1.0` | Volatility threshold in **Z-Score**. |
+| `InpShowPanel` | `true` | Show the status panel in the top-left corner. |
+| `InpShadeBackground`| `true` | Color the chart background based on the active regime. |
+| `InpShowRegLine` | `true` | Draw the black regression line on the price chart. |
 
-## 💻 Integration for EA Developers
+---
 
-This indicator is "iCustom-friendly." You can call it from an Expert Advisor using `iCustom`.
+## 💻 Developer Integration (EA)
 
-**Buffer Mapping:**
+This indicator is optimized for `iCustom` calls within Expert Advisors.
 
-* **Buffer 0 (DATA):** The Regression Slope Value.
-* **Buffer 1 (COLOR):** The Color Index (0=Gray, 1=DarkGreen, 2=Lime, 3=DarkRed, 4=LightCoral, 5=Gold).
-* **Buffer 2 (CALC):** The Realized Volatility value.
+### Buffer Mapping
+* **Buffer 0:** `Slope Value` (Double) - The raw regression slope.
+* **Buffer 1:** `Color Index` (Int) - The regime ID.
+* **Buffer 2:** `Volatility` (Double) - The realized volatility value.
 
-**Example Code:**
+### MQL5 Code Example
 ```cpp
-// Check if Regime is SIDEWAYS (Gold) to filter trades
-double slopeVal = iCustom(..., 0, shift);
-double colorIdx = iCustom(..., 1, shift);
+// Define the handle in OnInit()
+int handle = iCustom(_Symbol, _Period, "RegimeDetectionIndicator", ... inputs ...);
 
-if (colorIdx == 5) {
-   // Market is chopping/sideways. Avoid Trend Strategies.
+// Inside OnTick()
+double colorBuffer[];
+CopyBuffer(handle, 1, 1, 1, colorBuffer); // Copy index 1 (previous bar)
+
+int regime = (int)colorBuffer[0];
+
+// Color Index Map:
+// 1 = EXPLOSIVE UP (DarkGreen)
+// 2 = STEADY UP (Lime)
+// 3 = CRASH (DarkRed)
+// 4 = SLOW BLEED (LightCoral)
+// 5 = SIDEWAYS (Gold)
+
+if (regime == 5) {
+   Print("Market is sideways. Pausing trend EA.");
+   return;
 }
+
+📥 Installation
+Download RegimeDetectionIndicator.mq5.
+
+Open your MetaTrader 5 terminal.
+
+Go to File -> Open Data Folder.
+
+Navigate to MQL5 -> Indicators.
+
+Paste the file into this folder.
+
+Restart MT5 or right-click "Indicators" in the Navigator and hit Refresh.
+
+Compile the file in MetaEditor (F7).
+
+⚠️ Disclaimer
+Risk Warning: Trading financial markets involves significant risk of loss. This tool is provided for educational and analytical purposes only. Past performance of any trading system or methodology is not necessarily indicative of future results. The author accepts no liability for any loss or damage, including without limitation to, any loss of profit, which may arise directly or indirectly from use of or reliance on such information.
+
+Author: Mehrdad Shoghi
+
+Copyright: © 2025
