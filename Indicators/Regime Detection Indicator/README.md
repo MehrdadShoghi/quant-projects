@@ -5,7 +5,7 @@
 **Platform:** MetaTrader 5 (MT5)
 
 ![Indicator Screenshot](https://via.placeholder.com/800x400?text=Place+Your+Screenshot+Here)
-*(Add a screenshot of the indicator in action here)*
+
 
 ## 📈 Overview
 
