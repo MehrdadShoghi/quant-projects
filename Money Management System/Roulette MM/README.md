@@ -44,7 +44,7 @@ To solve the "giveback" problem common in progression strategies, this library i
 
 The following visual tests demonstrate how **RouletteMM** transforms standard strategies. By controlling drawdown during chop and compounding during trends, the equity curve is significantly improved.
 
-### EURUSD: Trend Strategy
+### EURUSD: Reversion Strategy
 **Top:** Fixed Lot Size | **Bottom:** With RouletteMM (Exponential Growth)
 
 ![EURUSD Comparison](screenshots/EURUSDH1withoutMMBalance.PNG)
