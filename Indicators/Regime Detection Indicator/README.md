@@ -59,14 +59,13 @@ The indicator combines **Trend Direction** and **Volatility State** to output on
 
 | Trend State | Volatility | **Regime Name** | **Color** | **Meaning** |
 | :--- | :--- | :--- | :--- | :--- |
-| **UP** | **HIGH** | **EXPLOSIVE UP** | `Dark Green` | FOMO rally, short squeeze, or parabolic move. |
-| **UP** | NORMAL | **STEADY UP** | `Lime` | Healthy, sustainable trend. Best for trend-following. |
-| **DOWN** | **HIGH** | **CRASH / DUMP** | `Dark Red` | Panic selling or news-driven breakdown. |
-| **DOWN** | NORMAL | **SLOW BLEED** | `Light Coral` | Grinding bear market or weak correction. |
-| **FLAT** | (ANY) | **SIDEWAYS** | `Gold` | Mean-reverting, ranging, or chopping. Best to stay out. |
+| **UP** | **HIGH** | **EXPLOSIVE UP** | ![#006400](https://placehold.co/15x15/006400/006400.png) `Dark Green` | FOMO rally, short squeeze, or parabolic move. |
+| **UP** | NORMAL | **STEADY UP** | ![#00FF00](https://placehold.co/15x15/00FF00/00FF00.png) `Lime` | Healthy, sustainable trend. Best for trend-following. |
+| **DOWN** | **HIGH** | **CRASH / DUMP** | ![#8B0000](https://placehold.co/15x15/8B0000/8B0000.png) `Dark Red` | Panic selling or news-driven breakdown. |
+| **DOWN** | NORMAL | **SLOW BLEED** | ![#F08080](https://placehold.co/15x15/F08080/F08080.png) `Light Coral` | Grinding bear market or weak correction. |
+| **FLAT** | (ANY) | **SIDEWAYS** | ![#FFD700](https://placehold.co/15x15/FFD700/FFD700.png) `Gold` | Mean-reverting, ranging, or chopping. Best to stay out. |
 
 ---
-
 ## 🧮 Technical Logic
 
 The indicator calculates two rolling metrics over a user-defined lookback window ($N$):
