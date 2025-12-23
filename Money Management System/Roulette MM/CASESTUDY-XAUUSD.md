@@ -50,8 +50,9 @@ The baseline strategy shows steady but slower growth. Without the compounding ef
 ### 2. After RouletteMM (Positive Progression)
 With **RouletteMM** enabled, the equity curve becomes exponential. The system capitalizes on winning streaks (clusters) by increasing lot sizes, while the "Flattening" mechanism protects capital during drawdowns.
 
-![After MM Graph](image_aca657.png)
-*(Source: Backtest Graph 2024-2025: XAUUSD, H1 - With RouletteMM)*
+![Before MM Graph](screenshots/XAUUSDH1withMMBalance.PNG)
+![Before MM Graph](screenshots/XAUUSDH1withMMBacktest.PNG)
+<sub>*(Backtest Graph 2024-2025: XAUUSD, H1 - Before M.M.)*<sub>
 
 ---
 
@@ -78,8 +79,8 @@ The detailed report confirms that the strategy performs consistently across diff
 * **Consecutive Wins:** Max of 7 ($647.33), showing the "Cycle" logic successfully capturing streaks.
 * **Time Analysis:** Profits are well-distributed across trading hours, indicating the strategy is not reliant on a single session's volatility.
 
-![Trade Analysis Report](image_aca6ed.png)
-*(Source: Strategy Tester Report Summary)*
+![Trade Analysis Report](screenshots/XAUUSDH1withMMBacktest.PNG)
+<sub>*(Strategy Tester Report Summary)*<sub>
 
 ---
 
