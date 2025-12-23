@@ -37,8 +37,8 @@ This allows traders to answer the most important question in trading: **"Is the 
 <sub>*(NDX100, M5, 02-Dec-2025)*<sub>
 
 
-![Indicator Screenshot](screenshots/XAUUSDM5.png)
-<sub>*(XAUUSD, M5, 15-Dec-2025 to 16-Dec-2025)*<sub>
+![Indicator Screenshot](screenshots/EURUSDH1.png)
+<sub>*(EURUSD, H1, 29-Oct-2025 to 06-Nov-2025)*<sub>
 
 
 ---
