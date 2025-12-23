@@ -117,25 +117,27 @@ if (regime == 5) {
    Print("Market is sideways. Pausing trend EA.");
    return;
 }
+```
 
-📥 Installation
-Download RegimeDetectionIndicator.mq5.
+---
 
-Open your MetaTrader 5 terminal.
+## 📥 Installation
 
-Go to File -> Open Data Folder.
+1. Download `RegimeDetectionIndicator.mq5`.
+2. Open your **MetaTrader 5** terminal.
+3. Go to **File** -> **Open Data Folder**.
+4. Navigate to `MQL5` -> `Indicators`.
+5. Paste the file into this folder.
+6. Restart MT5 or right-click "Indicators" in the Navigator and hit **Refresh**.
+7. Compile the file in **MetaEditor** (F7).
 
-Navigate to MQL5 -> Indicators.
+---
 
-Paste the file into this folder.
+## ⚠️ Disclaimer
 
-Restart MT5 or right-click "Indicators" in the Navigator and hit Refresh.
+**Risk Warning:** Trading financial markets involves significant risk of loss. This tool is provided for educational and analytical purposes only. Past performance of any trading system or methodology is not necessarily indicative of future results. The author accepts no liability for any loss or damage, including without limitation to, any loss of profit, which may arise directly or indirectly from use of or reliance on such information.
 
-Compile the file in MetaEditor (F7).
+---
 
-⚠️ Disclaimer
-Risk Warning: Trading financial markets involves significant risk of loss. This tool is provided for educational and analytical purposes only. Past performance of any trading system or methodology is not necessarily indicative of future results. The author accepts no liability for any loss or damage, including without limitation to, any loss of profit, which may arise directly or indirectly from use of or reliance on such information.
-
-Author: Mehrdad Shoghi
-
-Copyright: © 2025
+**Author:** Mehrdad Shoghi  
+**Copyright:** © 2025
