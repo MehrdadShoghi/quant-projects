@@ -27,7 +27,7 @@ The **Regime Detection Indicator** goes beyond simple overbought/oversold oscill
 
 This allows traders to answer the most important question in trading: **"Is the market trending, crashing, or ranging?"**
 
-![Indicator Screenshot](Indicators/Regime%20Detection%20Indicator/screenshots/XAUUSDM5.png)
+![Indicator Screenshot](screenshots/XAUUSDM5.png)
 *(Replace this link with a screenshot of your chart)*
 
 ---
