@@ -7,7 +7,7 @@
 //|------------------------------------------------------------------|
 //|  Purpose                                                         |
 //|  -------                                                         |
-//|  This library encapsulates the "Roulette" money           |
+//|  This library encapsulates the "Roulette" money                  |
 //|  management system, designed for modular integration into        |
 //|  Expert Advisors.                                                |
 //|                                                                  |
@@ -293,4 +293,5 @@ void CRouletteMM::Reset()
    m_CurrentUnit = 1.0;
    m_IsFlattening = false;
    SaveState();
+
   }
