@@ -45,7 +45,7 @@ The baseline strategy shows steady but slower growth. Without the compounding ef
 
 ![Before MM Graph](screenshots/XAUUSDH1withoutMMBalance.PNG)
 ![Before MM Graph](screenshots/XAUUSDH1withoutMMBacktest.PNG)
-*(Source: Backtest Graph 2024-2025: XAUUSD, H1 - Before M.M.)*
+<sub>*(Backtest Graph 2024-2025: XAUUSD, H1 - Before M.M.)*<sub>
 
 ### 2. After RouletteMM (Positive Progression)
 With **RouletteMM** enabled, the equity curve becomes exponential. The system capitalizes on winning streaks (clusters) by increasing lot sizes, while the "Flattening" mechanism protects capital during drawdowns.
