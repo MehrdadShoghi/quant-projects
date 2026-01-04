@@ -100,7 +100,7 @@ Signal is generated on the Confirmation Timeframe (e.g., H1).
 * **Sell:** If $Close_{t-1} < RangeLow$
 
 ### 3. Risk Management
-* **Stop Loss:** $SL_{distance} = P_{entry} \times \frac{SL_{\%}}{100}$
+* **Stop Loss:** $SL_{distance} = P_{entry} \times \frac{SL_{pct}}{100}$
 * **Take Profit:** $TP_{distance} = SL_{distance} \times RRR$
 
 ---
