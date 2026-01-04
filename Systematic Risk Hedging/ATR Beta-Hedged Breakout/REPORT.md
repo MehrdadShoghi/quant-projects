@@ -57,9 +57,19 @@ Two configurations were evaluated over the 2024–2025 period using 99% quality 
 | **Recovery Factor** | 4.43 | **6.90** |
 | **Sharpe Ratio** | 3.71 | **4.73** |
 
-### Equity Curve Behavior
-* **Unhedged:** Shows clear growth but suffers deeper drawdowns during periods of high index volatility.
-* **Hedged:** Results in a smoother curve with faster recovery and reduced equity compression during market shocks.
+### Visual Analysis
+
+#### 1. Unhedged Baseline
+*Standard breakout logic without correlation protection.*
+
+![Unhedged Equity Curve](screenshots/Backtest1-1.png)
+![Unhedged Report Summary](screenshots/Backtest1-2.png)
+
+#### 2. Hedged System (ATR-Scaled Beta)
+*Smoother equity curve with reduced volatility drag.*
+
+![Hedged Equity Curve](screenshots/Backtest2-1.png)
+![Hedged Report Summary](screenshots/Backtest2-2.png)
 
 ---
 
@@ -78,7 +88,7 @@ The hedging engine uses a specific set of logic to avoid over-hedging or hedging
 
 | Condition | Logic | Purpose |
 | :--- | :--- | :--- |
-| **Activation** | $|R_{hedge}| \le \text{LagFactor} \times |R_{main}|$ | Ensures hedge move lags the main move; prevents hedging noise. |
+| **Activation** | $\vert R_{hedge} \vert \le \text{LagFactor} \times \vert R_{main} \vert$ | Ensures hedge move lags the main move; prevents hedging noise. |
 | **Direction** | Main & Hedge must match direction | Prevents hedging during market divergence. |
 | **Sizing** | Clamped Beta ($0.5 \le \beta \le 5.0$) | Prevents outlier volatility from creating massive hedge positions. |
 | **Exit** | Main Trade Closure | Prevents orphan exposure; hedge dies when main trade dies. |
