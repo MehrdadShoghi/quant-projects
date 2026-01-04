@@ -69,16 +69,17 @@ The following table details exactly how the "Surgical Hedge" improved performanc
 
 #### 1. Unhedged Baseline
 *Standard breakout logic without correlation protection. Note the deeper drawdowns.*
+
 <img width="750" height="200" alt="Backtest1-2" src="https://github.com/user-attachments/assets/a4e3e66a-36d4-499f-959d-cdb563a72118" />
 
-
-
+<img width="750" height="200" alt="Backtest1-2" src="https://github.com/user-attachments/assets/eebb14a6-5e9c-4f84-9074-bc8795fb83fc" />
 
 #### 2. Optimized: Surgical Beta-Hedge
 *Smoother equity curve with higher net profit and faster recovery.*
 
-![Hedged Equity Curve](screenshots/Backtest2-1.png)
-![Hedged Report Summary](screenshots/Backtest2-2.png)
+<img width="750" height="200" alt="Backtest2-2" src="https://github.com/user-attachments/assets/3b06aa90-7de2-429e-9421-a300976ce6bb" />
+
+<img width="750" height="301" alt="Backtest2-1" src="https://github.com/user-attachments/assets/20d1414d-a3ca-4464-ba55-ec4921d31112" />
 
 ---
 
