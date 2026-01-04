@@ -69,9 +69,10 @@ The following table details exactly how the "Surgical Hedge" improved performanc
 
 #### 1. Unhedged Baseline
 *Standard breakout logic without correlation protection. Note the deeper drawdowns.*
+<img width="750" height="200" alt="Backtest1-2" src="https://github.com/user-attachments/assets/a4e3e66a-36d4-499f-959d-cdb563a72118" />
 
-![Unhedged Equity Curve](screenshots/Backtest1-1.png)
-![Unhedged Report Summary](screenshots/Backtest1-2.png)
+
+
 
 #### 2. Optimized: Surgical Beta-Hedge
 *Smoother equity curve with higher net profit and faster recovery.*
@@ -192,17 +193,6 @@ input bool   InpEnableHedging     = true;      // Master switch
 input string HedgeSymbol          = "SPX500";  // The correlated asset
 input double InpLagFactor         = 0.30;      // Correlation sensitivity
 ```
-
----
-
-## 📥 Installation
-
-1.  Download the `.mq5` source files.
-2.  Open your **MetaTrader 5** terminal.
-3.  Go to **File** -> **Open Data Folder**.
-4.  Navigate to `MQL5` -> `Experts`.
-5.  Paste the file into this folder.
-6.  Compile and attach to your chart (ensure the Hedge Symbol, e.g., SPX500, is in your Market Watch).
 
 ---
 
