@@ -13,50 +13,45 @@
 - [Overview](#-overview)
 - [Theory & Logic](#-theory--logic)
 - [Quantitative Analysis](#-quantitative-analysis)
-- [Visual Performance](#-visual-performance)
+- [Performance Comparison](#-performance-comparison)
 - [Key Features](#-key-features)
-- [Microstructure Logic](#-microstructure-logic)
-- [The Surgical Filter](#-the-surgical-filter)
+- [Hedge Logic Matrix](#-hedge-logic-matrix)
+- [Microstructure & Technical Logic](#-microstructure--technical-logic)
+- [Math & Calculations](#-math--calculations)
 - [Configuration](#-configuration)
+- [Installation](#-installation)
 - [Disclaimer](#-disclaimer)
 
 ---
 
 ## 📈 Overview
 
-Traders often view hedging as a necessary cost. The common belief is that hedging reduces risk but also reduces profit. This is called **"Hedging Drag."**
+**RangeBetaHedge** is a quantitative system designed to extract momentum alpha from intraday price discovery ranges while actively mitigating systemic market risk.
 
-I wanted to solve this problem for a **Nasdaq-100 (US100)** breakout strategy. My goal was to create a **"Surgical Hedge"** using the **S&P 500 (SPX500)**. This hedge should not be active all the time. It should only activate when specific statistical conditions are met.
+Traders often view hedging as a necessary cost, believing that while it reduces risk, it inevitably reduces profit (known as **"Hedging Drag"**). This project solves that problem for a **Nasdaq-100 (US100)** breakout strategy by introducing a **"Surgical Hedge"** using the **S&P 500 (SPX500)**.
 
-The results of this experiment were significant. By moving from a static hedge to a dynamic event-driven hedge, I achieved a **"Free Lunch"**:
+Unlike standard static hedges, this system is **event-driven**: it remains dormant 90% of the time and only activates when specific statistical "decoupling" events occur.
 
+---
+
+## 📘 Theory & Logic
+
+The core hypothesis rests on two market mechanics:
+
+1.  **Price Discovery (The Offense):** Markets frequently establish ranges during defined intraday windows. A confirmed breakout beyond this range, when aligned with higher-timeframe structure, represents a tradable momentum regime.
+2.  **Surgical Beta-Hedging (The Defense):** Standard hedging uses fixed lots, which is mathematically incorrect due to varying volatility. We calculate a **Dynamic Beta** using ATR to ensure the hedge matches the dollar volatility of the main position.
+
+### The "Free Lunch" Result
+By moving from static to dynamic hedging, the system achieved a rare result in Modern Portfolio Theory—reducing risk while increasing returns:
 * **Net Profit:** Increased by **30.29%**
 * **Risk (Drawdown):** Decreased by **23.03%**
 * **Recovery Factor:** Improved by **55.75%**
 
 ---
 
-## 📘 Theory & Logic
-
-The foundation of this expert advisor is a **Time-Based Volatility Breakout** system. It does not use lagging indicators like RSI or MACD. Instead, it captures the volatility injection that happens during specific market hours.
-
-### 1. The Core Strategy
-* **The Window:** At a specific server hour (e.g., 15:00), the EA begins monitoring the market.
-* **The Box:** Over a set duration (e.g., 60 minutes), it builds a "High/Low Box."
-* **The Trigger:** If the price breaks out of this box after the duration ends, a trade is taken.
-
-### 2. The Innovation: Surgical Beta-Hedging
-The breakout strategy provides the entries. However, the Surgical Hedge provides the stability. This is not a standard hedge. It is an **"Event-Driven"** hedge. It only activates when the correlation between Nasdaq (US100) and S&P 500 (SPX500) breaks down.
-
-Standard hedging uses fixed lots. This is mathematically incorrect because volatility differs between assets. We calculate a **Dynamic Beta** using ATR to ensure the hedge matches the dollar volatility of the main position.
-
-$$\beta = \frac{ATR_{main} \times VPP_{main}}{ATR_{hedge} \times VPP_{hedge}}$$
-
----
-
 ## 📊 Quantitative Analysis
 
-The table below breaks down exactly how the "Surgical Hedge" improved performance metrics compared to the baseline over 11,500 bars of historical data.
+The following table details exactly how the "Surgical Hedge" improved performance metrics compared to the unhedged baseline over 11,500 bars of historical data.
 
 | Metric | Unhedged (Baseline) | Surgical Hedge | **Value Change** | **% Impact** |
 | :--- | :--- | :--- | :--- | :--- |
@@ -66,23 +61,20 @@ The table below breaks down exactly how the "Surgical Hedge" improved performanc
 | **Recovery Factor** | 4.43 | **6.90** | +2.47 | **+55.75%** |
 | **Total Trades** | 479 | **526** | +47 | **+9.81%** |
 
-### Critical Findings
-1.  **The "Free Lunch" Effect:** Modern Portfolio Theory suggests that reducing risk reduces returns. This algorithm achieved the opposite. Net Profit increased by 30.29% while Equity Drawdown decreased by 23.03%.
-2.  **Surgical Efficiency:** The system executed 479 baseline trades. The hedged version executed 526 trades. This means the hedge only triggered 47 times (a **9.8% activation rate**). The algorithm stays dormant 90% of the time. It only strikes during "Decoupling Events."
-3.  **Resilience:** The Recovery Factor improved by 55.75% (from 4.43 to 6.90). This indicates that when the strategy takes a loss, it recovers the equity high-water mark twice as fast as the unhedged version.
+**Critical Insight:** The hedge only triggered 47 times out of 526 trades (a **9.8% activation rate**). The algorithm stays dormant during normal correlation, saving spread costs.
 
 ---
 
-## 📉 Visual Performance
+## 📉 Performance Comparison
 
-#### 1. Baseline: Unhedged Strategy
-*This is the standard breakout logic. It is profitable, but please note the deeper drawdowns in the equity curve below.*
+#### 1. Unhedged Baseline
+*Standard breakout logic without correlation protection. Note the deeper drawdowns.*
 
 ![Unhedged Equity Curve](screenshots/Backtest1-1.png)
 ![Unhedged Report Summary](screenshots/Backtest1-2.png)
 
-#### 2. Optimized: Surgical Beta-Hedge Strategy
-*Notice the smoother equity curve. The net profit is also significantly higher.*
+#### 2. Optimized: Surgical Beta-Hedge
+*Smoother equity curve with higher net profit and faster recovery.*
 
 ![Hedged Equity Curve](screenshots/Backtest2-1.png)
 ![Hedged Report Summary](screenshots/Backtest2-2.png)
@@ -91,77 +83,101 @@ The table below breaks down exactly how the "Surgical Hedge" improved performanc
 
 ## ✨ Key Features
 
-* **🛡️ Event-Driven Hedging:** Only activates when correlation breaks down (Surgical).
-* **💾 Microstructure Precision:** Uses M1 data for range calculation regardless of the chart timeframe.
-* **🧠 Dynamic Beta Sizing:** Automatically adjusts hedge size based on volatility ratios.
+* **🛡️ Event-Driven Hedging:** The "Surgical Filter" only activates the hedge when correlation breaks down.
+* **💾 Microstructure Precision:** Uses M1 data for range calculation regardless of the chart timeframe to prevent look-ahead bias.
+* **🧠 Dynamic Beta Sizing:** Automatically adjusts hedge size based on volatility ratios ($\beta$) to ensure true economic offset.
 * **⏱️ No Repainting:** Ranges are finalized only after the full window completes.
+* **📉 Risk Normalization:** Uses Percent-based Stop Loss and RRR-based Take Profit.
 
 ---
 
-## 🔬 Microstructure Logic
+## 🧩 Hedge Logic Matrix
 
-A key feature of this code is how it builds the range. It uses **M1 (1-minute)** data regardless of the trading timeframe. This ensures maximum precision for the High/Low calculation. It prevents false breakouts caused by data gaps on higher timeframes.
+The hedging engine uses a specific set of logic to avoid over-hedging or hedging during noise.
+
+| Condition | Logic | Purpose |
+| :--- | :--- | :--- |
+| **Activation** | $\vert R_{hedge} \vert \le \text{LagFactor} \times \vert R_{main} \vert$ | **The Surgical Filter.** Ensures hedge move lags the main move (a decoupling event). |
+| **Direction** | Main & Hedge must match | Prevents hedging during market divergence. |
+| **Sizing** | Clamped Beta ($0.5 \le \beta \le 5.0$) | Prevents outlier volatility from creating massive hedge positions. |
+| **Exit** | Main Trade Closure | Prevents orphan exposure; hedge dies when main trade dies. |
+
+---
+
+## 🔬 Microstructure & Technical Logic
+
+The system operates on a strict state-machine architecture to ensure deterministic behavior.
+
+### 1. Intraday Range Construction (M1 Precision)
+The EA iterates through **M1 (1-minute)** data to find the absolute High/Low, ensuring maximum precision and preventing false breakouts caused by data gaps on higher timeframes.
 
 ```cpp
 void BuildRangeFromM1Window() {
-   // Define the start and end time of the range
+   // Define start/end time
    datetime rangeStart = TodayAt(RangeStartHour, RangeStartMinute);
    datetime rangeEnd   = rangeStart + RangeDurationMin * 60;
 
    // Use M1 data for precision
-   double highs[];
-   double lows[];
+   double highs[], lows[];
    int hN = CopyHigh(MainSymbol, PERIOD_M1, rangeStart, rangeEnd, highs);
    int lN = CopyLow(MainSymbol, PERIOD_M1, rangeStart, rangeEnd, lows);
 
-   // Loop through all M1 bars to find the absolute High and Low
-   double hi = -DBL_MAX;
-   double lo =  DBL_MAX;
+   // Loop to find absolute extrema
+   double hi = -DBL_MAX; double lo = DBL_MAX;
    int n = MathMin(hN, lN);
    
    for(int i=0; i<n; i++) {
       if(highs[i] > hi) hi = highs[i];
       if(lows[i]  < lo) lo = lows[i];
    }
-   // Store the breakout levels
-   rangeHigh = hi;
-   rangeLow  = lo;
+   rangeHigh = hi; rangeLow  = lo;
 }
 ```
 
----
-
-## 🧩 The Surgical Filter
-
-The **`InpLagFactor` (0.30)** is the trigger threshold. It calculates the percentage return of both assets.
-The logic is: *"Only open a hedge if the S&P 500 has moved less than 30% of what the Nasdaq has moved."*
-
-* **Scenario A:** Both markets move together. We do not hedge. This saves spread costs.
-* **Scenario B:** Nasdaq moves but S&P 500 stalls. This is a **"decoupling event."** We hedge immediately to protect capital.
+### 2. The Surgical Filter Implementation
+The `InpLagFactor` (e.g., 0.30) is the trigger threshold. The logic dictates: *"Only open a hedge if the S&P 500 has moved less than 30% of what the Nasdaq has moved."*
 
 ```cpp
 bool ShouldOpenHedgeFilter() {
-   // Calculate % return for Main (Nasdaq) and Hedge (SPX)
+   // Calculate % return
    double main_ret = (main_now[0] - main_old[0]) / main_old[0];
    double hed_ret  = (hed_now[0]  - hed_old[0])  / hed_old[0];
 
-   // 1. Direction Logic: If they are moving in opposite directions, do NOT hedge.
+   // 1. Direction Logic: If opposite, do NOT hedge
    if(main_ret * hed_ret < 0) return false;
 
    // 2. Magnitude Logic (The Surgical Filter)
    double main_abs = MathAbs(main_ret);
    double hed_abs  = MathAbs(hed_ret);
 
-   // Trigger condition: Is the Hedge asset lagging significantly?
+   // Trigger: Is the Hedge asset lagging significantly?
    return (hed_abs <= InpLagFactor * main_abs);
 }
 ```
 
 ---
 
+## 🧮 Math & Calculations
+
+The core innovation is the **ATR-Scaled Beta** calculation, used to determine the exact lot size for the hedge instrument.
+
+### Beta ($\beta$) Formula
+To achieve economic neutrality, we balance Volatility and Contract Value:
+
+$$\beta = \frac{ATR_{main} \times VPP_{main}}{ATR_{hedge} \times VPP_{hedge}}$$
+
+* **ATR:** Average True Range
+* **VPP:** Value Per Point (Contract Size)
+
+### Smoothed Update & Final Sizing
+To avoid jitter, Beta is smoothed. The final lot size is derived from the main position:
+$$\text{HedgeLots} = \text{MainLots} \times \beta$$
+
+---
+
 ## ⚙️ Configuration
 
-These inputs control the time window and the risk for the main trade.
+These inputs control the time window and the correlation thresholds.
 
 ```cpp
 //--- Section 1: Time & Schedule
@@ -169,7 +185,6 @@ input group  "== Time & Schedule =="
 input int    RangeStartHour       = 15;        // Start Hour (Server Time)
 input int    RangeStartMinute     = 0;         // Start Minute
 input int    RangeDurationMin     = 60;        // Duration of the "Box" in minutes
-input bool   OneTradePerDay       = true;      // Limit to 1 trade to avoid over-trading
 
 //--- Section 2: Hedging Strategy
 input group  "== Hedging Strategy =="
@@ -177,6 +192,17 @@ input bool   InpEnableHedging     = true;      // Master switch
 input string HedgeSymbol          = "SPX500";  // The correlated asset
 input double InpLagFactor         = 0.30;      // Correlation sensitivity
 ```
+
+---
+
+## 📥 Installation
+
+1.  Download the `.mq5` source files.
+2.  Open your **MetaTrader 5** terminal.
+3.  Go to **File** -> **Open Data Folder**.
+4.  Navigate to `MQL5` -> `Experts`.
+5.  Paste the file into this folder.
+6.  Compile and attach to your chart (ensure the Hedge Symbol, e.g., SPX500, is in your Market Watch).
 
 ---
 
