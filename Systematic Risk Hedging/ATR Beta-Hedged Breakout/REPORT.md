@@ -76,18 +76,14 @@ The following table details exactly how the "Surgical Hedge" improved performanc
 
 ![BacktestReport](https://github.com/user-attachments/assets/660a64a3-d7bd-49eb-98a4-2d17d240c4ac)
 
-
-
-
-
-<img width="750" height="303" alt="Backtest1-1" src="https://github.com/user-attachments/assets/c74c180c-ec28-4d8b-b1f5-a0b415b39db7" />
-
 #### 2. Optimized: Surgical Beta-Hedge
 *Smoother equity curve with higher net profit and faster recovery.*
 
-<img width="750" height="200" alt="Backtest2-2" src="https://github.com/user-attachments/assets/1dbc5d2e-4a58-419e-80dd-616a1bb029da" />
+![Setting_Hedge](https://github.com/user-attachments/assets/ea0b1144-55fa-4f92-ba63-1cccee12deef)
 
-<img width="750" height="301" alt="Backtest2-1" src="https://github.com/user-attachments/assets/b24d5f49-8d2a-4a9b-9ce8-9e429f248c69" />
+![Balance-Equity_Hedge](https://github.com/user-attachments/assets/510d4e18-ee2f-4a41-8e7a-dd1ccc101a01)
+
+![BacktestReport_Hedge](https://github.com/user-attachments/assets/a40adb1a-2c91-4fa4-a074-de85c1ba578e)
 
 ---
 
