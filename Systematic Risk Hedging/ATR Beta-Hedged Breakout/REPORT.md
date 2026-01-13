@@ -198,6 +198,7 @@ input bool   InpEnableHedging     = true;      // Master switch
 input string HedgeSymbol          = "SPX500";  // The correlated asset
 input double InpLagFactor         = 0.30;      // Correlation sensitivity
 ```
+![Setting_Hedge](https://github.com/user-attachments/assets/b3bb5979-e644-4801-bad9-29affa37cf7a)
 
 ---
 
