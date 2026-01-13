@@ -53,25 +53,13 @@ By moving from static to dynamic hedging, the system achieved a rare result in M
 
 The following table details exactly how the "Surgical Hedge" improved performance metrics compared to the unhedged baseline over 11,500 bars of historical data.
 
-| Metric | Unhedged (Baseline) | Surgical Hedge | **Value Change** | **% Impact** |
-| :--- | :--- | :--- | :--- | :--- |
-| **Total Net Profit** | $5,618.95 | **$7,320.93** | +$1,701.98 | **+30.29%** |
-| **Max Drawdown** | 8.25% | **6.35%** | -1.90% | **-23.03%** |
-| **Sharpe Ratio** | 3.71 | **4.73** | +1.02 | **+27.49%** |
-| **Recovery Factor** | 4.43 | **6.90** | +2.47 | **+55.75%** |
-| **Total Trades** | 479 | **526** | +47 | **+9.81%** |
-
-
 | Metric | Unhedged (Baseline) | Surgical Hedge (Optimized) | Value Change | % Impact |
 | :--- | :--- | :--- | :--- | :--- |
-| **Total Net Profit** | $5,537.70 | **$7,319.92** | 🟢 +$1,782.22 | **+32.18%** |
-| **Max Drawdown** | 8.29% | **6.35%** | 🟢 -1.94% | **-23.40%** |
-| **Sharpe Ratio** | 3.63 | **4.68** | 🟢 +1.05 | **+28.93%** |
-| **Recovery Factor** | 4.37 | **6.90** | 🟢 +2.53 | **+57.89%** |
+| **Total Net Profit** | $5,537.70 | **$7,319.92** | +$1,782.22 | **+32.18%** |
+| **Max Drawdown** | 8.29% | **6.35%** | -1.94% | **-23.40%** |
+| **Sharpe Ratio** | 3.63 | **4.68** | +1.05 | **+28.93%** |
+| **Recovery Factor** | 4.37 | **6.90** | +2.53 | **+57.89%** |
 | **Total Trades** | 482 | **530** | +48 Hedges | **+9.96%** |
-
-
-**Critical Insight:** The hedge only triggered 47 times out of 526 trades (a **9.8% activation rate**). The algorithm stays dormant during normal correlation, saving spread costs.
 
 **Critical Insight:** The hedge only triggered 48 times out of 530 trades (a **9.06% activation rate**). The algorithm stays dormant during normal correlation, saving spread costs.
 
