@@ -70,7 +70,15 @@ The following table details exactly how the "Surgical Hedge" improved performanc
 #### 1. Unhedged Baseline
 *Standard breakout logic without correlation protection. Note the deeper drawdowns.*
 
-<img width="750" height="200" alt="Backtest1-2" src="https://github.com/user-attachments/assets/a4e3e66a-36d4-499f-959d-cdb563a72118" />
+![Setting](https://github.com/user-attachments/assets/b0a1ac30-3ff5-44ad-b433-6c6f8262c945)
+
+![Balance-Equity](https://github.com/user-attachments/assets/8bd12c0f-26af-4d4a-999b-effec8adc001)
+
+![BacktestReport](https://github.com/user-attachments/assets/660a64a3-d7bd-49eb-98a4-2d17d240c4ac)
+
+
+
+
 
 <img width="750" height="303" alt="Backtest1-1" src="https://github.com/user-attachments/assets/c74c180c-ec28-4d8b-b1f5-a0b415b39db7" />
 
