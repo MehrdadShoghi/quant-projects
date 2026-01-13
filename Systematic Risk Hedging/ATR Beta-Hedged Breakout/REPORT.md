@@ -43,10 +43,10 @@ The core hypothesis rests on two market mechanics:
 
 ### The "Free Lunch" Result
 By moving from static to dynamic hedging, the system achieved a rare result in Modern Portfolio Theory—reducing risk while increasing returns:
-* **Net Profit:** Increased by **30.29%**
-* **Risk (Drawdown):** Decreased by **23.03%**
-* **Recovery Factor:** Improved by **55.75%**
-
+* **Net Profit:** Increased by **+32.18%** (From $5,537.70 to $7,319.92)
+* **Equity Drawdown:** Reduced by **-23.40%** (From 8.29% to 6.35%)
+* **Recovery Factor:** Improved by **+57.89%** (From 4.37 to 6.90)
+* **Sharpe Ratio:** Increased by **+28.93%** (From 3.63 to 4.68)
 ---
 
 ## 📊 Quantitative Analysis
