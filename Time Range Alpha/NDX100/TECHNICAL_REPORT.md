@@ -109,22 +109,22 @@ Each configuration is visualized using a **Time-of-Day Heatmap**:
 ### 5.2 Reversion — Multi-Year Overview
 *Reversion behavior dominates in different intraday regimes than breakout behavior.*
 
-![NDX100 Reversion – All Years (30m Range)](../images/ndx100/heatmap_reversion_30m_all.png)
+<img width="2380" height="1393" alt="image" src="https://github.com/user-attachments/assets/effc0048-2dd6-4ff5-a55c-a7c2a02ca411" />
 
 ### 5.3 Structural Contrast: Breakout vs Reversion
 *No strategy dominates across all sessions; effectiveness is regime-dependent.*
 
-![Breakout vs Reversion Comparison](../images/ndx100/breakout_vs_reversion.png)
+<img width="1345" height="825" alt="image" src="https://github.com/user-attachments/assets/5078d717-1399-4087-916b-c2e31bef17dc" />
 
 ### 5.4 Year-Specific Validation (2024)
 *Validation of regime stability in the 2024 data set.*
 
-![NDX100 Reversion – 2024](../images/ndx100/heatmap_reversion_30m_2024.png)
+<img width="2382" height="1392" alt="image" src="https://github.com/user-attachments/assets/cdbae999-c59a-496d-afed-b270e98a3d43" />
 
 ### 5.5 Year-Specific Validation (2025)
 *While absolute performance varies, intraday regimes persist across years, supporting a behavioral explanation.*
 
-![NDX100 Reversion – 2025](../images/ndx100/heatmap_reversion_30m_2025.png)
+<img width="2382" height="1393" alt="image" src="https://github.com/user-attachments/assets/b89d6a0d-a7ae-4d4e-82bd-ed8e95a1e341" />
 
 ---
 
