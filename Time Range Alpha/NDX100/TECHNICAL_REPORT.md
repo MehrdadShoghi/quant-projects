@@ -16,28 +16,29 @@
 - [2. Instrument & Time Handling](#2-instrument--time-handling)
 - [3. Strategy Architecture](#3-strategy-architecture)
 - [4. Visualization Methodology](#4-visualization-methodology)
-- [5. Core Results](#5-core-results-with-visual-evidence)
+- [5. Empirical Results](#5-empirical-results-visual-evidence)
 - [6. Interpretation](#6-interpretation)
-- [7. How to Use This Framework](#7-how-to-use-this-framework-guidance-not-signals)
+- [7. Practical Application](#7-how-this-framework-should-be-used)
 - [8. Limitations](#8-limitations)
-- [9. Conclusion](#9-conclusion)
+- [9. Future Work](#9-future-work)
+- [10. Conclusion](#10-conclusion)
 - [Disclaimer](#-disclaimer)
 
 ---
 
 ## 1. Objective
 
-The objective of this study is to examine whether **Time-of-Day** acts as a meaningful and repeatable explanatory variable for intraday strategy performance in the **NDX100**.
+The objective of this study is to evaluate whether **Time-of-Day** acts as a meaningful and repeatable explanatory variable for intraday strategy performance in the **NDX100**.
 
-Rather than optimizing indicators or entries, all strategy logic is held constant while time-related dimensions (hour, minute, and range duration) are systematically varied.
+All trading logic, execution rules, and risk management parameters are held constant (*ceteris paribus*) while time-related dimensions (hour, minute, and range duration) are systematically varied.
 
-**Goal:** To identify intraday behavioral regimes, not to generate trade signals.
+**Goal:** To identify intraday behavioral regimes, not to generate or promote specific trade signals.
 
 ---
 
 ## 2. Instrument & Time Handling
 
-All tests were conducted under strict session alignment conditions.
+This alignment preserves consistent intraday market structure across all tests.
 
 | Parameter | Specification |
 | :--- | :--- |
@@ -61,12 +62,12 @@ A single intraday range is defined using one of the following durations. Once th
 * 60 Minutes
 
 ### 3.2 Entry Confirmation & Bias Control
-Trades are considered strictly under these conditions to ensure no look-ahead bias or intrabar assumptions:
+Trades are evaluated strictly under these conditions to prevent look-ahead bias:
 * ✅ A full M15 candle close.
 * ✅ The close occurs strictly above or below the locked range.
 * ✅ No overlap exists between range construction and entry candles.
 
-### 3.3 Strategy Variants
+### 3.3 Strategy Logic Matrix
 Two distinct behaviors are tested using the exact same trigger levels.
 
 | Variant | Logic | Action |
@@ -77,6 +78,8 @@ Two distinct behaviors are tested using the exact same trigger levels.
 | **Reversion** | Close < Low | **Long** (Fade/False Break) |
 
 ### 3.4 Risk Definition & Exit Rules
+Risk is market-structure-anchored, non-discretionary, and identical across all configurations.
+
 * **Max Trades:** 1 per day.
 * **Sizing:** Fixed fractional risk (1%).
 * **Stop Loss:** Placed at the opposite side of the defined range.
@@ -87,70 +90,106 @@ Two distinct behaviors are tested using the exact same trigger levels.
 
 ## 4. Visualization Methodology
 
-Each configuration is visualized using a **Time-of-Day Heatmap** to identify clusters.
+Each configuration is visualized using a **Time-of-Day Heatmap**:
 
 * **Y-Axis:** Range Start Hour
 * **X-Axis:** Range Start Minute (5-minute increments)
-* **Color:** Total Profit (USD)
-* **Label:** Win Rate (%)
+* **Color Scale:** Total Profit (USD)
+* **Cell Label:** Win Rate (%)
 
 ---
 
-## 5. Core Results (With Visual Evidence)
+## 5. Empirical Results (Visual Evidence)
 
-### 5.1 Breakout – Multi-Year Overview
-*This heatmap shows how breakout performance varies across the trading day when all years are aggregated.*
-> **Observation:** Performance concentrates into distinct **time clusters**, rather than isolated timestamps.
+### 5.1 Breakout — Multi-Year Overview
+*Breakout performance concentrates into distinct time clusters, rather than isolated timestamps.*
 
-### 5.2 Reversion – Multi-Year Overview
-*Reversion logic produces a materially different intraday profile.*
-> **Observation:** Mean-reverting behavior dominates in completely different regimes than breakout behavior.
+![NDX100 Breakout – All Years (60m Range)](../images/ndx100/heatmap_breakout_60m_all.png)
 
-### 5.3 Breakout vs Reversion (Structural Contrast)
-*Direct comparison highlights regime dependency rather than strategy superiority.*
+### 5.2 Reversion — Multi-Year Overview
+*Reversion behavior dominates in different intraday regimes than breakout behavior.*
 
-### 5.4 Year-Specific Validation (2024 / 2025)
-*To reduce overfitting risk, results are reviewed on individual years.*
-> **Observation:** While absolute performance varies, the **time-based regimes persist** across years.
+![NDX100 Reversion – All Years (30m Range)](../images/ndx100/heatmap_reversion_30m_all.png)
+
+### 5.3 Structural Contrast: Breakout vs Reversion
+*No strategy dominates across all sessions; effectiveness is regime-dependent.*
+
+![Breakout vs Reversion Comparison](../images/ndx100/breakout_vs_reversion.png)
+
+### 5.4 Year-Specific Validation (2024)
+*Validation of regime stability in the 2024 data set.*
+
+![NDX100 Reversion – 2024](../images/ndx100/heatmap_reversion_30m_2024.png)
+
+### 5.5 Year-Specific Validation (2025)
+*While absolute performance varies, intraday regimes persist across years, supporting a behavioral explanation.*
+
+![NDX100 Reversion – 2025](../images/ndx100/heatmap_reversion_30m_2025.png)
 
 ---
 
 ## 6. Interpretation
 
-Key conclusions drawn from the visuals:
-1.  **Time-of-Day** is a first-order variable.
-2.  **Strategy Effectiveness** is strictly regime-dependent.
-3.  **Robust Edges** appear as clusters, not single cells.
-4.  **Range Duration** interacts strongly with time; they must be evaluated together.
+Across all configurations:
+1.  **Time-of-Day** acts as a first-order variable.
+2.  **Strategy Effectiveness** is conditional on intraday regime.
+3.  **Robust Edges** appear as multi-cell clusters, not isolated points.
+4.  **Range Duration** materially interacts with time-of-day behavior.
 
 ---
 
-## 7. How to Use This Framework (Guidance, Not Signals)
+## 7. How This Framework Should Be Used
 
-This study intentionally avoids prescribing specific trading hours. Instead, practitioners should:
-
-1.  **Identify** robust clusters across adjacent minutes.
-2.  **Validate** behavior across multiple years.
+This study intentionally avoids prescribing specific trading hours. Instead, it provides a framework to:
+1.  **Identify** robust time clusters.
+2.  **Validate** behavior across adjacent minutes and multiple years.
 3.  **Re-evaluate** time filters periodically as regimes evolve.
 
-*This framework is designed for regime identification, not signal generation.*
+*The goal is regime identification, not signal publication.*
 
 ---
 
 ## 8. Limitations
 
 * ⚠️ Results are specific to NDX100 and M15.
-* ⚠️ Intraday regimes may evolve.
-* ⚠️ Time windows require ongoing validation.
+* ⚠️ Intraday regimes may evolve over time.
+* ⚠️ Time filters require ongoing validation.
 * ⚠️ No claim of future profitability is made.
 
 ---
 
-## 9. Conclusion
+## 9. Future Work
+
+This project is designed as a general time-alpha framework, not a single-market study. Planned extensions include:
+
+### 9.1 EURUSD Time-of-Day Analysis
+The same methodology will be applied to EURUSD to evaluate:
+* Time-of-day behavior in a 24-hour FX market.
+* Differences between index-driven and FX-driven microstructure.
+* Strategy–time alignment under lower session concentration.
+
+### 9.2 Cross-Market Strategy Consistency
+Future work will assess:
+* Whether breakout and reversion dominance shifts by market.
+* How range duration interacts with time in FX vs indices.
+* Persistence of intraday regimes across asset classes.
+
+### 9.3 Regime Stability and Revalidation
+Time-based regimes are not static. Ongoing work will focus on:
+* Periodic revalidation of time filters.
+* Monitoring regime drift.
+* Evaluating robustness under changing volatility conditions.
+
+### 9.4 Framework Generalization
+The long-term goal is to extend this framework to additional instruments, timeframes, and execution constraints while preserving **Fixed Logic**, **Transparent Assumptions**, and **Non-Discretionary Rules**.
+
+---
+
+## 10. Conclusion
 
 This study demonstrates that **Time-of-Day is a tradable market dimension.**
 
-Many strategies fail not due to poor logic, but because they are deployed in unfavorable intraday regimes. Time-based filtering offers a structurally simple and robust improvement without increasing complexity.
+Many strategies fail not because of flawed logic, but because they are deployed in unfavorable intraday regimes. Time-based filtering offers a structurally simple and robust way to improve expectancy without increasing complexity.
 
 ---
 
