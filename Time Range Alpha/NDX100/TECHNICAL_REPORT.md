@@ -104,7 +104,7 @@ Each configuration is visualized using a **Time-of-Day Heatmap**:
 ### 5.1 Breakout — Multi-Year Overview
 *Breakout performance concentrates into distinct time clusters, rather than isolated timestamps.*
 
-![NDX100 Breakout – All Years (60m Range)](../images/ndx100/heatmap_breakout_60m_all.png)
+<img width="2380" height="1393" alt="image" src="https://github.com/user-attachments/assets/732d68f0-0e96-4892-8fa0-8d3b8cf6e413" />
 
 ### 5.2 Reversion — Multi-Year Overview
 *Reversion behavior dominates in different intraday regimes than breakout behavior.*
