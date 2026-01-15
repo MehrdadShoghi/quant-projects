@@ -29,7 +29,7 @@
 
 Instead of optimizing indicators or entry triggers, this study isolates **Time** as the primary market regime variable. The central thesis is that the same strategy logic can be highly profitable or deeply unprofitable depending solely on the specific hour and minute it is deployed.
 
-This project visualizes these "Alpha Clusters" for the **Nasdaq-100 (NDX100)**, differentiating between Breakout and Reversion regimes.
+This project visualizes these "Alpha Clusters" for the **Nasdaq-100 (NDX100)**, differentiating between **Breakout** (Trend Following) and **Reversion** (False Breakout) regimes.
 
 ---
 
@@ -62,49 +62,58 @@ The following parameters were locked to ensure a controlled testing environment 
 
 ---
 
-## ✨ Key Findings
-
-* **Regime Divergence:** Breakout and Reversion logic dominate completely different intraday windows.
-* **Cluster Stability:** Profitability is not random; it forms distinct blocks of time (e.g., specific 60-minute windows) where positive expectancy is sustained.
-* **Expectancy Edge:** Simple time-based filtering significantly improves the Sharpe ratio and Recovery Factor of the underlying logic without changing the entry signal itself.
-
----
-
 ## 🧩 Strategy Logic Matrix
 
-The entry engine uses a deterministic breakout/reversion model based on a fixed pre-market or intraday range.
+The entry engine uses a deterministic breakout/reversion model based on a fixed pre-market or intraday range. Both strategies utilize the same **Range High/Low** triggers but execute in opposite directions.
 
-| Condition | Logic | Purpose |
-| :--- | :--- | :--- |
-| **Range Definition** | Fixed Duration (1, 15, 30, or 60 min) | Establishes the initial "Balance" or reference area. |
-| **Lock State** | High/Low locked after close | Prevents repainting; static reference levels. |
-| **Trigger** | `Close[1] > RangeHigh` | Confirms momentum commitment (Entry on Close). |
-| **Stop Loss** | Opposite Range Extreme | Defines the structural failure point ($1R$). |
-| **Take Profit** | $2 \times \text{StopDistance}$ | Enforces positive skew ($2R$). |
+| Condition | Logic | Breakout Action | Reversion Action |
+| :--- | :--- | :--- | :--- |
+| **Range Definition** | Fixed Duration (1–60 min) | Establish Balance | Establish Balance |
+| **Upside Trigger** | `Close[1] > RangeHigh` | **BUY** (Momentum) | **SELL** (False Break/Fade) |
+| **Downside Trigger** | `Close[1] < RangeLow` | **SELL** (Momentum) | **BUY** (False Break/Fade) |
+| **Stop Loss** | Opposite Range Extreme | Structural Failure point | Structural Failure point |
+| **Take Profit** | $2 \times \text{StopDistance}$ | Positive Skew ($2R$) | Positive Skew ($2R$) |
 
 ---
 
 ## 🔬 Microstructure & Execution
 
-The system operates on strict **M15 close-only** logic to avoid intrabar noise and look-ahead bias.
+The system operates on strict **M15 close-only** logic. The specific execution direction depends on the selected Strategy Mode (Breakout vs. Reversion).
 
 ### Entry Logic Pseudo-Code
-The strategy validates the breakout only after the candle has sealed.
+The strategy validates the trigger only after the candle has sealed.
 
 ```cpp
+enum ENUM_STRATEGY_TYPE { STRATEGY_BREAKOUT, STRATEGY_REVERSION };
+
 void OnBarClose() {
    // 1. Define Range from Reference Window
    double rangeHigh = GetHigh(RangeStartTime, RangeDuration);
    double rangeLow  = GetLow(RangeStartTime, RangeDuration);
+   double riskDist  = rangeHigh - rangeLow;
 
-   // 2. Check Breakout Condition (M15 Close)
+   // 2. Logic: Upside Trigger (Close > High)
    if (Close[1] > rangeHigh && !IsTradeToday) {
-       // Breakout Mode
-       OpenOrder(ORDER_BUY, SL=rangeLow, TP=rangeLow + (rangeHigh-rangeLow)*2);
+       if (StrategyMode == STRATEGY_BREAKOUT) {
+           // Momentum: Buy strength
+           OpenOrder(ORDER_BUY, SL=rangeLow, TP=rangeHigh + (riskDist*2)); 
+       }
+       else if (StrategyMode == STRATEGY_REVERSION) {
+           // Fade: Sell the false breakout
+           OpenOrder(ORDER_SELL, SL=rangeHigh + riskDist, TP=rangeHigh - (riskDist*2));
+       }
    }
+
+   // 3. Logic: Downside Trigger (Close < Low)
    else if (Close[1] < rangeLow && !IsTradeToday) {
-       // Reversion Mode (if active) would fade this move
-       OpenOrder(ORDER_SELL, SL=rangeHigh, TP=rangeHigh - (rangeHigh-rangeLow)*2);
+       if (StrategyMode == STRATEGY_BREAKOUT) {
+           // Momentum: Sell weakness
+           OpenOrder(ORDER_SELL, SL=rangeHigh, TP=rangeLow - (riskDist*2));
+       }
+       else if (StrategyMode == STRATEGY_REVERSION) {
+           // Fade: Buy the false breakdown
+           OpenOrder(ORDER_BUY, SL=rangeLow - riskDist, TP=rangeLow + (riskDist*2));
+       }
    }
 }
 ```
@@ -116,14 +125,12 @@ void OnBarClose() {
 ### 1. Time-of-Day Alpha Heatmap
 *Visualizing expectancy clusters. Green zones indicate high-probability time windows.*
 
-<img width="2385" height="1391" alt="image" src="https://github.com/user-attachments/assets/12f6eb74-293b-40bf-ab7b-b44151d87b62" />
-
+![Time-of-Day Heatmap](/images/ndx100_time_alpha_heatmap.png)
 
 ### 2. Regime Comparison: Breakout vs. Reversion
 *Contrasting performance curves showing how different regimes perform on the same data set.*
 
-<img width="1345" height="825" alt="image" src="https://github.com/user-attachments/assets/74a325d5-9a54-4823-be37-65796686adf2" />
-
+![Breakout vs Reversion](/images/ndx100_breakout_vs_reversion.png)
 
 ---
 
