@@ -125,12 +125,12 @@ void OnBarClose() {
 ### 1. Time-of-Day Alpha Heatmap
 *Visualizing expectancy clusters. Green zones indicate high-probability time windows.*
 
-![Time-of-Day Heatmap](/images/ndx100_time_alpha_heatmap.png)
+<img width="2380" height="1393" alt="image" src="https://github.com/user-attachments/assets/d45dfeab-ae6f-4826-85bc-a377262fac5a" />
 
 ### 2. Regime Comparison: Breakout vs. Reversion
 *Contrasting performance curves showing how different regimes perform on the same data set.*
 
-![Breakout vs Reversion](/images/ndx100_breakout_vs_reversion.png)
+<img width="1345" height="825" alt="image" src="https://github.com/user-attachments/assets/aa4684d3-9aed-44ec-a8d2-ddf91514fb39" />
 
 ---
 
