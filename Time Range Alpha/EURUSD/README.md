@@ -125,7 +125,8 @@ void OnBarClose() {
 ### 1. Time-of-Day Alpha Heatmap
 *Highlighting expectancy clusters across hours and minutes. Green zones represent statistically favorable temporal regimes.*
 
-*(See Tableau dashboard for interactive exploration.)*
+<img width="2304" height="1393" alt="image" src="https://github.com/user-attachments/assets/a56ac6a5-3ef0-4609-8741-2322bbc6997e" />
+
 
 ### 2. Breakout vs. Reversion Regime Comparison
 *Direct comparison showing how EURUSD alternates between momentum-dominant and mean-reverting behavior depending on time of day.*
