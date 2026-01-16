@@ -7,7 +7,7 @@
 
 **A quantitative study isolating time as a market regime variable to decode intraday momentum and mean-reversion behavior in FX.**
 
-[**🔗 View Interactive Dashboard (Tableau Public)**]([https://public.tableau.com/app/profile/mehrdad.shoghi/viz/NDX100/Sheet1?publish=yes](https://public.tableau.com/app/profile/mehrdad.shoghi/viz/EURUSD_17673419580200/Sheet1?publish=yes))
+[**🔗 View Interactive Dashboard (Tableau Public)**]([https://public.tableau.com/app/profile/mehrdad.shoghi/viz/NDX100/Sheet1publish=yes](https://public.tableau.com/app/profile/mehrdad.shoghi/viz/EURUSD_17673419580200/Sheet1?publish=yes))
 
 ---
 
