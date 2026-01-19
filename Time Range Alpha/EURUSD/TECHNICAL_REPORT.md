@@ -108,23 +108,28 @@ Each configuration is visualized using a **Time-of-Day Heatmap**:
 
 ### 5.1 Breakout — Multi-Year Overview
 *Breakout performance in EURUSD is highly time-dependent and concentrates into limited volatility expansion windows.*
-> *(Insert EURUSD Breakout – Multi-Year Heatmap)*
+
+<img width="2304" height="1392" alt="image" src="https://github.com/user-attachments/assets/d3312939-8d8e-4016-99f4-eb4e6ad54322" />
 
 ### 5.2 Reversion — Multi-Year Overview
 *Reversion behavior dominates a broader portion of the trading day, reflecting EURUSD’s mean-reverting microstructure.*
-> *(Insert EURUSD Reversion – Multi-Year Heatmap)*
+
+<img width="2303" height="1394" alt="image" src="https://github.com/user-attachments/assets/4f602203-eff0-4d41-80f7-ac9723c9fc58" />
 
 ### 5.3 Structural Contrast: Breakout vs Reversion
 *No strategy dominates across all sessions; effectiveness is regime-dependent and time-conditional.*
-> *(Insert Breakout vs Reversion Comparison)*
+
+<img width="2688" height="1943" alt="image" src="https://github.com/user-attachments/assets/3e9e82dd-724f-4cd5-a07d-3114f917be78" />
 
 ### 5.4 Year-Specific Validation (2024)
 *Validation of regime stability in the 2024 FX environment.*
-> *(Insert EURUSD 2024 Heatmap)*
+
+<img width="2304" height="1393" alt="image" src="https://github.com/user-attachments/assets/995587c0-2d7d-4ac5-b7c4-fc9f80673dd7" />
 
 ### 5.5 Year-Specific Validation (2025)
 *Despite changes in volatility and macro conditions, intraday regimes persist across years.*
-> *(Insert EURUSD 2025 Heatmap)*
+
+<img width="2297" height="1396" alt="image" src="https://github.com/user-attachments/assets/ea4f0bc6-afc7-4655-b902-94f80eac32e1" />
 
 ---
 
