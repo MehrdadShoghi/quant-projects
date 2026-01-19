@@ -85,7 +85,7 @@ Risk is market-structure-anchored, non-discretionary, and identical across all c
 * **Max Trades:** 1 per day.
 * **Sizing:** Fixed fractional risk (1%).
 * **Stop Loss:** Placed at the opposite side of the defined range.
-* **Take Profit:** Fixed at **2R** (Based on stop distance).
+* **Take Profit:** Fixed at **1R** (Based on stop distance).
 * **Forced Exit:** All positions closed at **22:59** Server Time.
 * *Constraint:* This removes overnight exposure and isolates pure intraday regime behavior.
 
