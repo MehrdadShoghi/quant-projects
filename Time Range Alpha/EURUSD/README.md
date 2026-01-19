@@ -144,7 +144,7 @@ void OnBarClose() {
 [**🔗 Detailed Report**](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/EURUSD/TECHNICAL_REPORT.md)
 
 **Author:** Mehrdad Shoghi 
-**Copyright:** © 2025
+**Copyright:** © 2026
 
 
 
