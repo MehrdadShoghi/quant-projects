@@ -139,7 +139,7 @@ void OnBarClose() {
 **Research Only:** This project is a time-filter discovery framework, not a complete "black box" trading system. The data provided is for educational and analytical purposes only. Past performance of any specific time cluster is not necessarily indicative of future results. Trading futures and CFDs involves significant risk of loss.
 
 ---
-[**🔗 Detailed Report**](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/EURUSD/TECHNICAL_REPORT.md)
+[**🔗 Detailed Report**](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/NDX100/TECHNICAL_REPORT.md)
 
 **Author:** Mehrdad Shoghi 
 **Copyright:** © 2026
