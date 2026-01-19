@@ -143,4 +143,4 @@ void OnBarClose() {
 ---
 **Author:** Mehrdad Shoghi 
 **Copyright:** © 2025
-**Detailed Report:** [Time Range Alpha/EURUSD/TECHNICAL_REPORT.md)
+**Detailed Report:** (Time Range Alpha/EURUSD/TECHNICAL_REPORT.md)
