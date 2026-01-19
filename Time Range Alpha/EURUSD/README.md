@@ -131,6 +131,8 @@ void OnBarClose() {
 ### 2. Breakout vs. Reversion Regime Comparison
 *Direct comparison showing how EURUSD alternates between momentum-dominant and mean-reverting behavior depending on time of day.*
 
+<img width="2688" height="1943" alt="image" src="https://github.com/user-attachments/assets/1956eff5-d255-4ebe-a702-8780d0741477" />
+
 ---
 
 ## ⚠️ Disclaimer
