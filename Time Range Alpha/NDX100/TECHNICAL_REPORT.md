@@ -199,5 +199,5 @@ Many strategies fail not because of flawed logic, but because they are deployed 
 
 ---
 
-**Author:** Mehrdad Shoghi
-**Detailed Report:** [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)
+**Author:** Mehrdad Shoghi 
+**Copyright:** © 2026
