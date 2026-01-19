@@ -141,6 +141,6 @@ void OnBarClose() {
 **Research Only:** This project is a time-filter discovery framework, not a complete automated trading system. Results are intended for analytical and educational purposes only. FX trading involves substantial risk, and historical performance of specific time windows does not guarantee future outcomes.
 
 ---
-
-**Author:** Mehrdad Shoghi
+**Author:** Mehrdad Shoghi 
+**Copyright:** © 2025
 **Detailed Report:** [docs/TECHNICAL_REPORT.md](docs/TECHNICAL_REPORT.md)
