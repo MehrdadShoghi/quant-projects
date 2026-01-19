@@ -57,7 +57,7 @@ All parameters were fixed to ensure a clean, controlled comparison across time w
 | **Timeframe** | M15 | Execution timeframe. |
 | **Data Period** | 2024 – 2025 | Multi-year aggregated sample. |
 | **Risk Model** | Fixed Fractional (1%) | Constant risk per trade. |
-| **Reward/Risk** | 2.0R | Positive expectancy skew. |
+| **Reward/Risk** | 1.0R | Positive expectancy skew. |
 | **Constraints** | 1 Trade Per Day | Pure regime sampling. |
 | **Force Exit** | 22:59 Server Time | No overnight FX exposure. |
 
