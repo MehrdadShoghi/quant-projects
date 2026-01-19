@@ -73,7 +73,7 @@ Both strategies are driven by the same range-based reference structure and diffe
 | **Upside Trigger** | `Close[1] > RangeHigh` | **BUY** (Momentum) | **SELL** (False Break) |
 | **Downside Trigger** | `Close[1] < RangeLow` | **SELL** (Momentum) | **BUY** (False Break) |
 | **Stop Loss** | Opposite Range Extreme | Structural Invalidation | Structural Invalidation |
-| **Take Profit** | $2 \times \text{StopDistance}$ | Positive Skew ($2R$) | Positive Skew ($2R$) |
+| **Take Profit** | $1 \times \text{StopDistance}$ | Positive Skew ($1R$) | Positive Skew ($1R$) |
 
 ---
 
