@@ -141,8 +141,10 @@ void OnBarClose() {
 **Research Only:** This project is a time-filter discovery framework, not a complete automated trading system. Results are intended for analytical and educational purposes only. FX trading involves substantial risk, and historical performance of specific time windows does not guarantee future outcomes.
 
 ---
+[**🔗 Detailed Report**](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/EURUSD/TECHNICAL_REPORT.md)
+
 **Author:** Mehrdad Shoghi 
 **Copyright:** © 2025
-**Detailed Report:** ([Time Range Alpha/EURUSD/TECHNICAL_REPORT.md](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/EURUSD/README.md))
 
-[**Detailed Report**](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/EURUSD/TECHNICAL_REPORT.md)
+
+
