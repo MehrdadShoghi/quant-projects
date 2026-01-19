@@ -144,3 +144,5 @@ void OnBarClose() {
 **Author:** Mehrdad Shoghi 
 **Copyright:** © 2025
 **Detailed Report:** ([Time Range Alpha/EURUSD/TECHNICAL_REPORT.md](https://github.com/MehrdadShoghi/quant-projects/blob/main/Time%20Range%20Alpha/EURUSD/README.md))
+
+[**Detailed Report:**](https://public.tableau.com/app/profile/mehrdad.shoghi/viz/EURUSD_17673419580200/Sheet1?publish=yes)
