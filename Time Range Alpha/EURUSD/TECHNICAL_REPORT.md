@@ -198,5 +198,5 @@ Many EURUSD strategies fail not due to flawed logic, but because they are deploy
 
 ---
 
-**Author:** Mehrdad Shoghi
-**Detailed Report:** [docs/TECHNICAL_REPORT_EURUSD.md](docs/TECHNICAL_REPORT_EURUSD.md)
+**Author:** Mehrdad Shoghi 
+**Copyright:** © 2026
