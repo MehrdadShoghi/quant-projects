@@ -247,3 +247,14 @@ This study:
 The baseline backtest confirms a **positive-expectancy reference case** under ideal execution with 1% risk per trade. Monte Carlo execution stress widens the distribution of outcomes but does not eliminate profitability across a meaningful subset of scenarios.
 
 The dominant failure mode is **Drawdown Inflation**, not expectancy collapse — a characteristic consistent with structurally sound, time-based intraday strategies.
+
+---
+
+## ⚠️ Research Disclaimer
+
+**Educational Use Only:** This project is research-oriented and provided for analytical purposes only. It does not constitute investment advice or a recommendation to trade live capital. Past performance in a simulation is not indicative of future real-world results.
+
+---
+
+**Author:** Mehrdad Shoghi 
+**Copyright:** © 2026
