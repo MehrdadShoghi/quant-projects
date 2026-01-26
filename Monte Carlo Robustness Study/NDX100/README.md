@@ -64,7 +64,7 @@ The study follows a professional quantitative workflow to validate robustness:
 
 *Each point represents a unique execution scenario plotted in Profit–Drawdown space.*
 
-<img width="640" height="690" alt="image" src="https://github.com/user-attachments/assets/ccbc71db-43df-4a14-aba5-954419536cea" />
+<img width="640" height="690" alt="image" src="https://github.com/user-attachments/assets/0282fbe3-f99b-4122-9e8c-0a9f9025b9b4" />
 
 **Key Observation:** The dense green region indicates structurally profitable outcomes. While execution stress widens dispersion, it does not eliminate the core profitable region, suggesting the edge is structural rather than execution-dependent.
 
