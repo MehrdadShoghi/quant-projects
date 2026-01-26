@@ -90,15 +90,11 @@ The study follows a professional quantitative workflow to validate robustness:
 
 ---
 
-## 📂 Repository Contents
-
-* `EA/` – MT5 Research Expert Advisor (Strategy Logic + Monte Carlo Engine).
-* `data/` – Exported Monte Carlo CSV results.
-* `analysis/` – Aggregations and visualizations.
-* `README.md` – Project overview.
-
----
-
 ## ⚠️ Research Disclaimer
 
 **Educational Use Only:** This project is research-oriented and provided for analytical purposes only. It does not constitute investment advice or a recommendation to trade live capital. Past performance in a simulation is not indicative of future real-world results.
+
+---
+
+**Author:** Mehrdad Shoghi 
+**Copyright:** © 2026
