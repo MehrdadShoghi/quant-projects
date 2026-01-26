@@ -1,78 +1,104 @@
 # NDX100 Intraday Range Breakout: Monte Carlo Robustness Study
 
-![Platform](https://img.shields.io/badge/Platform-MetaTrader%205-blue)
-![Asset](https://img.shields.io/badge/Asset-NDX100-green)
-![Method](https://img.shields.io/badge/Method-Monte%20Carlo-orange)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+![Type](https://img.shields.io/badge/Type-Technical%20Report-blue)
+![Status](https://img.shields.io/badge/Status-Final-green)
+![Asset](https://img.shields.io/badge/Asset-NDX100-orange)
+![Method](https://img.shields.io/badge/Method-Monte%20Carlo-lightgrey)
 
-**A quantitative execution stress test evaluating the distributional robustness of a structural intraday breakout strategy.**
+**A Quantitative Robustness Study using Execution Stress Testing.**
 
 ---
 
 ## 📑 Table of Contents
 - [1. Research Objective](#1-research-objective)
 - [2. Strategy Specification](#2-strategy-specification)
-- [3. Research Infrastructure](#3-research-infrastructure)
+- [3. EA Design & Research Infrastructure](#3-ea-design-and-research-infrastructure)
 - [4. Baseline Backtest Results](#4-baseline-backtest-results)
 - [5. Monte Carlo Methodology](#5-monte-carlo-methodology)
-- [6. Robustness Analysis](#6-robustness-analysis)
-- [7. Microstructure Theory](#7-microstructure-theory)
-- [8. Limitations & Future Work](#8-limitations--future-work)
-- [Disclaimer](#-disclaimer)
+- [6. Monte Carlo Outcome Landscape](#6-monte-carlo-outcome-landscape)
+- [7. Robustness Regime Classification](#7-robustness-regime-classification)
+- [8. Robust-Only Performance Expectations](#8-robust-only-performance-expectations)
+- [9. Why This Edge Likely Exists](#9-why-this-edge-likely-exists)
+- [10. Limitations & Failure Modes](#10-limitations--failure-modes)
+- [11. Practical Deployment Considerations](#11-practical-deployment-considerations)
+- [12. Future Research Extensions](#12-future-research-extensions)
+- [13. Research Integrity Statement](#13-research-integrity-statement)
+- [Final Assessment](#final-assessment)
 
 ---
 
 ## 1. Research Objective
 
-The objective of this study is to determine whether a time-of-day, structurally defined intraday breakout strategy on **NDX100** demonstrates **Robustness**—defined as the ability to maintain positive expectancy under realistic execution uncertainty.
+The objective of this study is to determine whether a time-of-day, structurally defined intraday breakout strategy on **NDX100**:
+1.  Demonstrates positive expectancy under clean execution.
+2.  Maintains profitability under realistic execution uncertainty.
+3.  Exhibits bounded, interpretable failure modes rather than catastrophic breakdown.
 
-This study explicitly avoids parameter optimization, focusing instead on distributional behavior. The workflow follows a professional quantitative sequence:
-1.  **Baseline:** Establish behavior under ideal execution.
-2.  **Stress:** Apply Monte Carlo degradation (spread, slippage, delay).
-3.  **Analyze:** Evaluate the distribution of outcomes rather than a single equity curve.
+The study explicitly avoids parameter optimization and instead focuses on robustness and distributional behavior, consistent with professional quantitative research standards.
 
 ---
 
 ## 2. Strategy Specification
 
-### 2.1 Core Parameters
-
+### 2.1 Instrument & Timeframes
 | Parameter | Value | Note |
 | :--- | :--- | :--- |
 | **Instrument** | NDX100 | Nasdaq-100 Index |
-| **Signal Timeframe** | H1 | Decision Logic (Closed Bar) |
-| **Range Timeframe** | M1 | Precision Range Construction |
-| **Range Window** | 15:00 – 16:00 (Server) | **08:00 – 09:00 New York** |
-| **Frequency** | Max 1 Trade / Day | Pure regime sampling |
+| **Signal Timeframe** | H1 | Closed-bar confirmation (reduces noise). |
+| **Range Timeframe** | M1 | Precision range construction. |
+| **Separation** | Intentional | M1 ensures accuracy; H1 prevents overreaction. |
 
-### 2.2 Logic Matrix
+### 2.2 Time-Based Range Definition
+The strategy defines a fixed intraday range during:
+* **15:00 – 16:00 (Server Time)**
+* **08:00 – 09:00 New York Time**
 
-| Component | Logic | Purpose |
-| :--- | :--- | :--- |
-| **Range Definition** | High/Low of 15:00–16:00 | Captures Pre-NY Open equilibrium. |
-| **Entry Trigger** | H1 Close > High (Long)<br>H1 Close < Low (Short) | Confirms directional expansion. |
-| **Risk Model** | 1% of Equity | Volatility-normalized exposure. |
-| **Stop Loss** | Opposite Range Extreme | Anchored to market structure. |
-| **Take Profit** | $2.0 \times \text{Risk}$ | Positive Skew ($2R$). |
+This window corresponds to an early New York session liquidity regime transition, where overnight price compression often resolves into directional expansion. The range high and low represent a temporary equilibrium zone prior to price discovery.
+
+### 2.3 Entry Logic (Breakout Mode)
+After the range window completes:
+* **Long Position:** Triggered if the previous H1 candle closes *above* the range high.
+* **Short Position:** Triggered if the previous H1 candle closes *below* the range low.
+* **Constraints:** Entries evaluated on closed bars only. Max 1 trade per day.
+
+*The strategy does not predict direction; it reacts to price expansion beyond a structural boundary.*
+
+### 2.4 Risk & Payoff Model
+Risk per trade is applied consistently across Baseline and Monte Carlo tests.
+
+| Parameter | Logic |
+| :--- | :--- |
+| **Risk per Trade** | 1% of Account Equity |
+| **Position Sizing** | Dynamic, Volatility-Adjusted |
+| **Stop Loss** | Anchored to opposite range extreme |
+| **Reward-to-Risk** | 2.0 (Positive Skew) |
 
 ---
 
-## 3. Research Infrastructure
+## 3. EA Design and Research Infrastructure
 
-The **MetaTrader 5 (MT5)** Expert Advisor was designed as a data-collection engine, not a production trading system.
+The custom **MetaTrader 5 (MT5)** Expert Advisor was developed specifically for research integrity, not live deployment.
 
-* **High-Fidelity Construction:** Uses M1 bars for exact range boundaries, preventing tick-noise errors.
-* **Deterministic State:** Strict isolation of daily trade logic to ensure statistical cleanliness.
-* **Instrumentation:** Captures spread, slippage, and fill metrics per pass.
-* **Quant-Grade Export:** Outputs CSV data via `OnTesterPass()` for downstream statistical analysis.
+* **High-Fidelity Range Construction:** Uses M1 bars to compute exact intraday highs and lows.
+* **Strict Trade Isolation:** Symbol filtering and unique magic numbers prevent contamination.
+* **Deterministic State:** Enforces strict one-trade-per-day logic for statistical cleanliness.
+* **Execution Instrumentation:** Captures spread, slippage, delay, and fill outcomes.
+* **Quant-Grade Export:** Per-pass metrics exported via `OnTesterPass()` with a CSV schema designed for downstream statistical analysis.
 
 ---
 
 ## 4. Baseline Backtest Results
+*(Monte Carlo Disabled – Reference Case)*
 
-*Reference Case: Ideal Execution (Monte Carlo OFF)*
+Before introducing execution uncertainty, a baseline backtest was conducted to establish the strategy’s unperturbed behavior under idealized execution.
 
-Before applying stress, a baseline was established to confirm the strategy's unperturbed edge.
+### 4.1 Test Conditions
+* **Monte Carlo:** OFF
+* **Risk per trade:** 1%
+* **Instrument:** NDX100 (H1)
+* **History:** 99% Quality
+
+### 4.2 Baseline Performance Summary
 
 | Metric | Result |
 | :--- | :--- |
@@ -82,70 +108,139 @@ Before applying stress, a baseline was established to confirm the strategy's unp
 | **Win Rate** | 47.76% |
 | **Max Drawdown** | ~16.96% |
 
-> **Interpretation:** The strategy achieves positive expectancy without a high win rate, consistent with a $2R$ model. Performance is not driven by outliers, though a mild directional asymmetry (Long bias) exists.
+### 4.3 Interpretation
+* **Positive Expectancy:** Achieved without a high win rate (consistent with RRR = 2.0).
+* **Bounded Drawdowns:** Material but typical for breakout systems.
+* **Asymmetry:** A mild directional asymmetry exists (longs outperform shorts), consistent with equity index behavior.
 
 ---
 
 ## 5. Monte Carlo Methodology
+*(Execution Stress Testing)*
 
-Traditional backtests assume instant, perfect fills. This study simulates the reality of intraday index trading by randomizing execution variables across **500 deterministic seeds**.
+### 5.1 Rationale
+Traditional backtests implicitly assume stable spreads and instant fills—unrealistic for intraday index trading. Monte Carlo simulation is used to explicitly model execution uncertainty.
 
-### 5.1 Stress Dimensions
-* **Spread Inflation:** Multiplicative widening of the bid/ask spread.
-* **Slippage:** Random positive/negative price slippage on entry/exit.
-* **Latency:** Execution delays (milliseconds) leading to price drift.
-* **Order Failure:** Probabilistic rejection of orders.
+### 5.2 Execution Stress Dimensions
+Each optimization pass defines a unique execution environment by randomizing:
+* **Spread Inflation** (Multiplicative)
+* **Slippage** (Points)
+* **Execution Delay** (Milliseconds)
+* **Order Failure** (Probability)
 
-### 5.2 Outcome Landscape
-Results are analyzed in **Profit–Drawdown** space.
-* **Core:** A dense, profitable region representing structural edge.
-* **Degradation:** Performance degrades gradually as stress increases.
-* **Failure Mode:** The primary failure mode is **Drawdown Inflation**, not the collapse of expectancy.
+*Controls: 500 deterministic seeds; Stress Levels 1.0 → 3.0.*
+
+### 5.3 Impact
+Stress tests whether the strategy’s edge survives imperfect market participation (effective breakout threshold widening, adverse drift, missed trades).
 
 ---
 
-## 6. Robustness Analysis
+## 6. Monte Carlo Outcome Landscape
 
-Scenarios are classified into distinct regimes to separate deployable performance from fragility.
+Monte Carlo results are analyzed in **Profit–Drawdown** space, where each point represents one execution scenario.
 
-| Classification | Criteria | Observation |
-| :--- | :--- | :--- |
-| **Robust** | Profit $\ge$ $1,500 <br> DD $\le$ 15% | The majority of scenarios fall here. |
-| **Fragile** | Profitable <br> DD $>$ 15% | Edge exists, but risk exceeds tolerance. |
-| **Failing** | Net Negative | Statistically rare outcomes. |
+**Key Observations:**
+* A dense, profitable core of outcomes.
+* Gradual performance degradation as stress increases.
+* Rare, isolated loss-making scenarios.
 
-### Robust-Only Expectations
+*This pattern indicates structural expectancy, not reliance on ideal execution.*
+
+---
+
+## 7. Robustness Regime Classification
+
+To separate deployable from non-deployable outcomes, scenarios are classified using explicit thresholds:
+
+| Classification | Criteria |
+| :--- | :--- |
+| **Robust** | Net Profit ≥ $1,500 AND Max Drawdown ≤ 15% |
+| **Fragile** | Profitable, but Drawdown > 15% |
+| **Failing** | Net Negative Outcomes |
+
+*Observation: The majority of scenarios fall into the robust or fragile categories, with failing outcomes statistically rare.*
+
+---
+
+## 8. Robust-Only Performance Expectations
+
+To avoid optimistic bias, expectation statistics are computed **only** from robust scenarios.
+
+### 8.1 Profit Expectation
+* **Average Profit:** ~$2,539
 * **Median Profit:** ~$2,573
+* *Observation: Close alignment between mean and median suggests profitability is not outlier-driven.*
+
+### 8.2 Drawdown Profile
 * **Median Drawdown:** ~13.15%
+* **75th Percentile:** ~13.99%
+* *Observation: Values remain comfortably below the robustness threshold, leaving headroom.*
 
 ---
 
-## 7. Microstructure Theory
+## 9. Why This Edge Likely Exists
+*(Market Microstructure Perspective)*
 
-Why does the edge exist?
+The **08:00 – 09:00 New York** window represents a liquidity regime transition characterized by:
+1.  Increasing institutional participation.
+2.  Resolution of overnight price compression.
+3.  Activation of stop-loss and momentum-driven order flow.
 
-The **08:00–09:00 New York** window represents a critical liquidity regime transition.
-1.  **Compression:** Overnight price action often compresses prior to the US Open.
-2.  **Activation:** The range boundaries act as activation zones for institutional order flow and stop runs.
-3.  **Expansion:** The strategy captures the resolution of this equilibrium into directional momentum.
-
----
-
-## 8. Limitations & Future Work
-
-### Limitations
-* **Drawdown Sensitivity:** Vulnerable under severe execution stress.
-* **Single Asset:** Validated only on NDX100.
-* **Session Bias:** Dependent on early New York volatility.
-* **Regime Risk:** Structural market shifts are not modeled.
-
-### Future Extensions
-* **Cross-Index Replication:** Testing on ES (S&P 500) and DAX.
-* **Adaptive Risk:** Scaling risk based on volatility regimes.
-* **Execution Filters:** Dynamic logic to avoid trading during spread blowouts.
+The intraday range acts as a proxy for temporary equilibrium, and its boundaries become **order-flow activation zones**. Because the strategy reacts to price discovery, not indicators, its edge persists until execution costs overwhelm follow-through.
 
 ---
 
-## ⚠️ Disclaimer
+## 10. Limitations & Failure Modes
 
-**Research Only:** This project is a quantitative research framework, not a complete automated trading system. The results presented are for educational and analytical purposes only. Past performance—whether baseline or simulated—does not guarantee future results. Trading futures and CFDs involves significant risk of loss.
+This strategy is not universally robust. Key limitations include:
+* ⚠️ **Drawdown Sensitivity** under severe execution stress.
+* ⚠️ **Dependence** on early NY session volatility.
+* ⚠️ **Directional Asymmetry** between long and short trades.
+* ⚠️ **Single-Trade Constraint** limits exposure but risks missing follow-through.
+* ⚠️ **Regime Change Risk** (Structural shifts not modeled by Monte Carlo).
+
+*Importantly, failure occurs gradually (drawdown inflation), not catastrophically.*
+
+---
+
+## 11. Practical Deployment Considerations
+
+Before any live deployment, prudent enhancements would include:
+* **Execution Filters:** Skip trades during spread/slippage blowouts.
+* **Adaptive Risk:** Scale risk during adverse conditions.
+* **Directional Controls:** Separate Long/Short risk profiles.
+* **Volatility Filters:** Confirm session volatility before entry.
+* **Broker Profiling:** Calibrate delays to specific broker infrastructure.
+
+*These were intentionally excluded to preserve research neutrality.*
+
+---
+
+## 12. Future Research Extensions
+
+Potential extensions consistent with quant standards:
+1.  **Cross-Index Replication:** Testing on ES (S&P 500), RTY, DAX.
+2.  **Volatility-Conditioned** range selection.
+3.  **Direction-Specific Modeling.**
+4.  **Adaptive Reward-to-Risk** structures.
+5.  **Multi-Session Ensemble** strategies.
+
+---
+
+## 13. Research Integrity Statement
+
+This study:
+* ✅ Avoids curve-fitting and parameter mining.
+* ✅ Separates baseline behavior from stressed distributions.
+* ✅ Reports limitations transparently.
+* ✅ Makes no claims of guaranteed profitability.
+
+*Results represent empirical research, not investment advice.*
+
+---
+
+## Final Assessment
+
+The baseline backtest confirms a **positive-expectancy reference case** under ideal execution with 1% risk per trade. Monte Carlo execution stress widens the distribution of outcomes but does not eliminate profitability across a meaningful subset of scenarios.
+
+The dominant failure mode is **Drawdown Inflation**, not expectancy collapse — a characteristic consistent with structurally sound, time-based intraday strategies.
