@@ -119,7 +119,6 @@ Before introducing execution uncertainty, a baseline backtest was conducted to e
 ---
 
 ## 5. Monte Carlo Methodology
-<img width="2377" height="951" alt="image" src="https://github.com/user-attachments/assets/7a0a07ae-0324-4cea-b5a8-d7fb154c1440" />
 
 ### 5.1 Rationale
 Traditional backtests implicitly assume stable spreads and instant fills—unrealistic for intraday index trading. Monte Carlo simulation is used to explicitly model execution uncertainty.
@@ -139,6 +138,8 @@ Stress tests whether the strategy’s edge survives imperfect market participati
 ---
 
 ## 6. Monte Carlo Outcome Landscape
+
+<img width="2377" height="951" alt="image" src="https://github.com/user-attachments/assets/7a0a07ae-0324-4cea-b5a8-d7fb154c1440" />
 
 Monte Carlo results are analyzed in **Profit–Drawdown** space, where each point represents one execution scenario.
 
@@ -171,6 +172,8 @@ To separate deployable from non-deployable outcomes, scenarios are classified us
 
 To avoid optimistic bias, expectation statistics are computed **only** from robust scenarios.
 
+<img width="2058" height="661" alt="image" src="https://github.com/user-attachments/assets/5c10f7d0-c377-4711-9fda-62ecd507930c" />
+
 ### 8.1 Profit Expectation
 * **Average Profit:** ~$2,539
 * **Median Profit:** ~$2,573
@@ -184,7 +187,6 @@ To avoid optimistic bias, expectation statistics are computed **only** from robu
 ---
 
 ## 9. Why This Edge Likely Exists
-*(Market Microstructure Perspective)*
 
 The **08:00 – 09:00 New York** window represents a liquidity regime transition characterized by:
 1.  Increasing institutional participation.
