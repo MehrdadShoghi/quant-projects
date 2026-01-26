@@ -219,8 +219,6 @@ Before any live deployment, prudent enhancements would include:
 * **Volatility Filters:** Confirm session volatility before entry.
 * **Broker Profiling:** Calibrate delays to specific broker infrastructure.
 
-*These were intentionally excluded to preserve research neutrality.*
-
 ---
 
 ## 12. Future Research Extensions
@@ -241,8 +239,6 @@ This study:
 * ✅ Separates baseline behavior from stressed distributions.
 * ✅ Reports limitations transparently.
 * ✅ Makes no claims of guaranteed profitability.
-
-*Results represent empirical research, not investment advice.*
 
 ---
 
