@@ -88,6 +88,9 @@ The custom **MetaTrader 5 (MT5)** Expert Advisor was developed specifically for 
 ---
 
 ## 4. Baseline Backtest Results
+
+<img width="2684" height="1064" alt="image" src="https://github.com/user-attachments/assets/c7d32769-3e60-4497-b581-8602fa57c2fe" />
+<img width="2669" height="690" alt="image" src="https://github.com/user-attachments/assets/4bf01d05-5a5a-427a-a83a-0e5807920f9d" />
 *(Monte Carlo Disabled – Reference Case)*
 
 Before introducing execution uncertainty, a baseline backtest was conducted to establish the strategy’s unperturbed behavior under idealized execution.
