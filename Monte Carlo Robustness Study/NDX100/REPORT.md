@@ -119,7 +119,7 @@ Before introducing execution uncertainty, a baseline backtest was conducted to e
 ---
 
 ## 5. Monte Carlo Methodology
-*(Execution Stress Testing)*
+<img width="2377" height="951" alt="image" src="https://github.com/user-attachments/assets/7a0a07ae-0324-4cea-b5a8-d7fb154c1440" />
 
 ### 5.1 Rationale
 Traditional backtests implicitly assume stable spreads and instant fills—unrealistic for intraday index trading. Monte Carlo simulation is used to explicitly model execution uncertainty.
@@ -160,6 +160,8 @@ To separate deployable from non-deployable outcomes, scenarios are classified us
 | **Robust** | Net Profit ≥ $1,500 AND Max Drawdown ≤ 15% |
 | **Fragile** | Profitable, but Drawdown > 15% |
 | **Failing** | Net Negative Outcomes |
+
+<img width="2381" height="961" alt="image" src="https://github.com/user-attachments/assets/633843bb-faba-4264-bc2c-79a49be51996" />
 
 *Observation: The majority of scenarios fall into the robust or fragile categories, with failing outcomes statistically rare.*
 
